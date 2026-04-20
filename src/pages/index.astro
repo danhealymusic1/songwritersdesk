@@ -26,27 +26,17 @@ const posts = (await getCollection('blog'))
         </p>
         <p class="text-ink-soft mb-6 text-sm">Drop your email and I'll tell you when it's live.</p>
 
-        <!-- Replace action URL with your ConvertKit / Beehiiv / Mailerlite form endpoint -->
-        <form
-          action="https://example.com/subscribe"
-          method="POST"
-          class="flex flex-col sm:flex-row gap-3"
-        >
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="you@songwriter.com"
-            class="flex-1 px-4 py-3 rounded-md border border-ink/20 bg-paper focus:border-accent focus:outline-none"
-          />
-          <button
-            type="submit"
-            class="px-5 py-3 rounded-md bg-ink text-paper hover:bg-accent transition-colors no-underline font-semibold"
-          >
-            Tell me when it's live
-          </button>
-        </form>
+        <iframe
+          src="https://subscribe-forms.beehiiv.com/5fc2e95f-4778-4af0-8c37-17455d00995b"
+          class="beehiiv-embed"
+          data-test-id="beehiiv-embed"
+          frameborder="0"
+          scrolling="no"
+          style="width: 100%; height: 56px; margin: 0; border-radius: 0 !important; background-color: transparent;"
+        ></iframe>
       </div>
+
+      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
     </section>
   ) : (
     <>
