@@ -51,9 +51,79 @@ const fullTitle = title === 'The Songwriter\'s Desk'
     <!-- ADSENSE (uncomment and set client id once approved) -->
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
   </head>
-  <body class="bg-paper text-ink">
+  <body class="bg-paper text-ink relative overflow-x-hidden">
+    {/* Sound-wave side decorations — desktop only, purely decorative */}
+    <div class="hidden xl:block pointer-events-none select-none fixed inset-y-0 left-0 w-24 text-ink/15" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 96 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <g>
+          <line x1="12" y1="320" x2="12" y2="480" />
+          <line x1="22" y1="280" x2="22" y2="520" />
+          <line x1="32" y1="200" x2="32" y2="600" />
+          <line x1="42" y1="340" x2="42" y2="460" />
+          <line x1="52" y1="140" x2="52" y2="660" />
+          <line x1="62" y1="300" x2="62" y2="500" />
+          <line x1="72" y1="240" x2="72" y2="560" />
+          <line x1="82" y1="360" x2="82" y2="440" />
+        </g>
+        <g transform="translate(0 -800)">
+          <line x1="12" y1="320" x2="12" y2="480" />
+          <line x1="22" y1="280" x2="22" y2="520" />
+          <line x1="32" y1="200" x2="32" y2="600" />
+          <line x1="42" y1="340" x2="42" y2="460" />
+          <line x1="52" y1="140" x2="52" y2="660" />
+          <line x1="62" y1="300" x2="62" y2="500" />
+          <line x1="72" y1="240" x2="72" y2="560" />
+          <line x1="82" y1="360" x2="82" y2="440" />
+        </g>
+        <g transform="translate(0 800)">
+          <line x1="12" y1="320" x2="12" y2="480" />
+          <line x1="22" y1="280" x2="22" y2="520" />
+          <line x1="32" y1="200" x2="32" y2="600" />
+          <line x1="42" y1="340" x2="42" y2="460" />
+          <line x1="52" y1="140" x2="52" y2="660" />
+          <line x1="62" y1="300" x2="62" y2="500" />
+          <line x1="72" y1="240" x2="72" y2="560" />
+          <line x1="82" y1="360" x2="82" y2="440" />
+        </g>
+      </svg>
+    </div>
+    <div class="hidden xl:block pointer-events-none select-none fixed inset-y-0 right-0 w-24 text-ink/15" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 96 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <g>
+          <line x1="14" y1="360" x2="14" y2="440" />
+          <line x1="24" y1="260" x2="24" y2="540" />
+          <line x1="34" y1="180" x2="34" y2="620" />
+          <line x1="44" y1="320" x2="44" y2="480" />
+          <line x1="54" y1="220" x2="54" y2="580" />
+          <line x1="64" y1="300" x2="64" y2="500" />
+          <line x1="74" y1="160" x2="74" y2="640" />
+          <line x1="84" y1="340" x2="84" y2="460" />
+        </g>
+        <g transform="translate(0 -800)">
+          <line x1="14" y1="360" x2="14" y2="440" />
+          <line x1="24" y1="260" x2="24" y2="540" />
+          <line x1="34" y1="180" x2="34" y2="620" />
+          <line x1="44" y1="320" x2="44" y2="480" />
+          <line x1="54" y1="220" x2="54" y2="580" />
+          <line x1="64" y1="300" x2="64" y2="500" />
+          <line x1="74" y1="160" x2="74" y2="640" />
+          <line x1="84" y1="340" x2="84" y2="460" />
+        </g>
+        <g transform="translate(0 800)">
+          <line x1="14" y1="360" x2="14" y2="440" />
+          <line x1="24" y1="260" x2="24" y2="540" />
+          <line x1="34" y1="180" x2="34" y2="620" />
+          <line x1="44" y1="320" x2="44" y2="480" />
+          <line x1="54" y1="220" x2="54" y2="580" />
+          <line x1="64" y1="300" x2="64" y2="500" />
+          <line x1="74" y1="160" x2="74" y2="640" />
+          <line x1="84" y1="340" x2="84" y2="460" />
+        </g>
+      </svg>
+    </div>
+
     <Header />
-    <main class="max-w-5xl mx-auto px-6 py-10 min-h-[60vh]">
+    <main class="max-w-5xl mx-auto px-6 py-10 min-h-[60vh] relative z-10">
       <slot />
     </main>
     <Footer />

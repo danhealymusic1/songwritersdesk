@@ -8,12 +8,17 @@ const links = [
 const { pathname } = Astro.url;
 ---
 
-<header class="border-b border-ink/10 bg-paper">
-  <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
-    <a href="/" class="no-underline flex items-baseline gap-2">
+<header class="border-b border-ink/10 bg-paper relative z-10">
+  <div class="max-w-5xl mx-auto px-6 py-5 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+    <a href="/" class="no-underline">
       <span class="serif text-xl font-bold tracking-tight">The Songwriter's Desk</span>
     </a>
-    <nav class="flex gap-6 text-sm">
+
+    <a href="/" class="justify-self-center hidden sm:block no-underline" aria-label="Home">
+      <img src="/logo.png" alt="" class="h-12 w-auto" />
+    </a>
+
+    <nav class="flex gap-6 text-sm justify-self-end">
       {links.map(({ href, label }) => (
         <a
           href={href}
