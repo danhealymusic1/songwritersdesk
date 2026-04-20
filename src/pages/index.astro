@@ -13,12 +13,13 @@ const posts = (await getCollection('blog'))
 
 <BaseLayout title="The Songwriter's Desk">
   {COMING_SOON ? (
+    <>
     <section class="max-w-xl mx-auto text-center py-16">
       <h1 class="serif text-5xl md:text-6xl mb-4 leading-tight">The Songwriter's Desk</h1>
       <p class="text-lg text-ink-soft mb-2">Tools, templates and honest advice for working songwriters.</p>
       <p class="text-sm text-ink-muted mb-10">Hosted by Dan Healy.</p>
 
-      <div class="bg-paper-warm border border-ink/10 rounded-lg p-8 text-left">
+      <div id="subscribe-form-state" class="bg-paper-warm border border-ink/10 rounded-lg p-8 text-left">
         <h2 class="serif text-xl mb-2">Coming soon.</h2>
         <p class="text-ink-soft mb-5">
           A songwriter's toolkit I always wanted — slant-rhyme finder, a song idea generator,
@@ -33,11 +34,64 @@ const posts = (await getCollection('blog'))
           scrolling="no"
           style="width: 100%; height: 56px; margin: 0; border: 0; background: transparent; display: block;"
         ></iframe>
-        <p class="text-xs text-ink-muted mt-3">
-          A welcome email from Dan will arrive in a minute or two — if you don't see it, check your spam or promotions folder and drag it into your inbox so the next one lands.
+      </div>
+
+      <div id="subscribe-thanks-state" class="bg-paper-warm border border-ink/10 rounded-lg p-8 text-left hidden">
+        <h2 class="serif text-2xl mb-3">Thank you for subscribing.</h2>
+        <p class="text-ink-soft">
+          <strong class="text-ink">Check your spam or promotions folder.</strong> A welcome email from Dan should arrive in a minute or two — if it landed there, drag it into your inbox so the next one lands where it belongs.
         </p>
       </div>
     </section>
+
+    <script is:inline>
+      (function () {
+        const BEEHIIV_ORIGIN = 'https://subscribe-forms.beehiiv.com';
+        const form = document.getElementById('subscribe-form-state');
+        const thanks = document.getElementById('subscribe-thanks-state');
+        if (!form || !thanks) return;
+
+        const iframe = form.querySelector('iframe[src*="subscribe-forms.beehiiv.com"]');
+        if (!iframe) return;
+
+        let baselineHeight = null;
+        let swapped = false;
+
+        function parsePx(v) {
+          if (v == null) return NaN;
+          if (typeof v === 'number') return v;
+          return parseInt(String(v), 10);
+        }
+
+        window.addEventListener('message', (event) => {
+          if (event.origin !== BEEHIIV_ORIGIN) return;
+          const data = event.data;
+          if (!data || typeof data !== 'object') return;
+
+          // Complete the handshake so the iframe starts emitting style updates.
+          if (data.type === 'beehiiv:child-loaded' && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({ type: 'beehiiv:parent-loaded' }, BEEHIIV_ORIGIN);
+            return;
+          }
+
+          if (swapped) return;
+          if (data.type !== 'beehiiv:styles') return;
+          const h = parsePx(data.payload && data.payload.height);
+          if (isNaN(h)) return;
+
+          if (baselineHeight === null || h < baselineHeight) {
+            baselineHeight = h;
+            return;
+          }
+          if (h > baselineHeight + 40) {
+            swapped = true;
+            form.style.display = 'none';
+            thanks.classList.remove('hidden');
+          }
+        });
+      })();
+    </script>
+    </>
   ) : (
     <>
       <section class="py-12 border-b border-ink/10">
