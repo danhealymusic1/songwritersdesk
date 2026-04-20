@@ -5,9 +5,7 @@ import { useState, useMemo } from 'react';
 // combined actually pay out to the songwriter/publisher side — NOT the
 // headline "Spotify pays $0.003" number, which is the total rights-holder
 // payout (most of which goes to the label/master side).
-//
-// Sources vary; we use rounded industry averages and let users edit them.
-const DEFAULT_PLATFORMS = [
+const PLATFORMS = [
   { id: 'spotify', name: 'Spotify', rate: 0.00050 },
   { id: 'apple', name: 'Apple Music', rate: 0.00110 },
   { id: 'amazon', name: 'Amazon Music', rate: 0.00070 },
@@ -27,16 +25,16 @@ const parseNum = (v) => {
 };
 
 export default function RoyaltyCalculator() {
-  const [platforms, setPlatforms] = useState(() =>
-    DEFAULT_PLATFORMS.map((p) => ({ ...p, streams: '' }))
+  // Streams per platform — this is the only per-platform thing the user edits.
+  const [streams, setStreams] = useState(() =>
+    Object.fromEntries(PLATFORMS.map((p) => [p.id, '']))
   );
   const [writers, setWriters] = useState([
     { ...emptyWriter(), share: '100' },
   ]);
-  const [currency, setCurrency] = useState('USD');
 
-  const updatePlatform = (idx, field, value) => {
-    setPlatforms((ps) => ps.map((p, i) => (i === idx ? { ...p, [field]: value } : p)));
+  const updateStreams = (id, value) => {
+    setStreams((s) => ({ ...s, [id]: value }));
   };
 
   const updateWriter = (idx, field, value) => {
@@ -55,14 +53,13 @@ export default function RoyaltyCalculator() {
   };
 
   const totals = useMemo(() => {
-    const perPlatform = platforms.map((p) => {
-      const s = parseNum(p.streams);
-      const r = parseNum(p.rate);
-      return { ...p, earnings: s * r };
+    const perPlatform = PLATFORMS.map((p) => {
+      const s = parseNum(streams[p.id]);
+      return { ...p, streams: streams[p.id], earnings: s * p.rate };
     });
     const gross = perPlatform.reduce((sum, p) => sum + p.earnings, 0);
     return { perPlatform, gross };
-  }, [platforms]);
+  }, [streams]);
 
   const shareTotal = useMemo(
     () => writers.reduce((sum, w) => sum + parseNum(w.share), 0),
@@ -94,7 +91,7 @@ export default function RoyaltyCalculator() {
       <section className="mb-8">
         <div className="flex items-baseline justify-between mb-3">
           <h2 className="serif text-xl">Streams by platform</h2>
-          <span className="text-xs text-ink-muted">Rates are editable — update if you have better data</span>
+          <span className="text-xs text-ink-muted">Rates are 2024 US averages — see guide below</span>
         </div>
 
         <div className="overflow-x-auto">
@@ -103,44 +100,35 @@ export default function RoyaltyCalculator() {
               <tr className="text-left text-xs uppercase tracking-wider text-ink-muted border-b border-ink/10">
                 <th className="py-2 pr-3">Platform</th>
                 <th className="py-2 pr-3">Streams</th>
-                <th className="py-2 pr-3">$/stream (songwriter side)</th>
+                <th className="py-2 pr-3">$/stream</th>
                 <th className="py-2 text-right">Royalty</th>
               </tr>
             </thead>
             <tbody>
-              {platforms.map((p, i) => (
+              {totals.perPlatform.map((p) => (
                 <tr key={p.id} className="border-b border-ink/5">
                   <td className="py-2 pr-3">{p.name}</td>
                   <td className="py-2 pr-3">
                     <input
                       type="text"
                       inputMode="numeric"
-                      value={p.streams}
-                      onChange={(e) => updatePlatform(i, 'streams', e.target.value)}
+                      value={streams[p.id]}
+                      onChange={(e) => updateStreams(p.id, e.target.value)}
                       placeholder="0"
                       className="w-32 px-2 py-1 rounded border border-ink/15 bg-paper focus:outline-none focus:border-accent"
                     />
                   </td>
-                  <td className="py-2 pr-3">
-                    <div className="flex items-center gap-1">
-                      <span className="text-ink-muted">$</span>
-                      <input
-                        type="text"
-                        inputMode="decimal"
-                        value={p.rate}
-                        onChange={(e) => updatePlatform(i, 'rate', e.target.value)}
-                        className="w-24 px-2 py-1 rounded border border-ink/15 bg-paper focus:outline-none focus:border-accent"
-                      />
-                    </div>
+                  <td className="py-2 pr-3 text-ink-muted tabular-nums">
+                    ${p.rate.toFixed(5)}
                   </td>
-                  <td className="py-2 text-right font-medium">
-                    {fmt(totals.perPlatform[i].earnings)}
+                  <td className="py-2 text-right font-medium tabular-nums">
+                    {fmt(p.earnings)}
                   </td>
                 </tr>
               ))}
               <tr>
                 <td colSpan={3} className="py-3 text-right font-medium">Total songwriter-side royalty</td>
-                <td className="py-3 text-right font-bold text-lg">{fmt(totals.gross)}</td>
+                <td className="py-3 text-right font-bold text-lg tabular-nums">{fmt(totals.gross)}</td>
               </tr>
             </tbody>
           </table>
