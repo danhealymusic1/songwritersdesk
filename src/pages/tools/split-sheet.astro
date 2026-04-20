@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SplitSheetGenerator from '../../components/tools/SplitSheetGenerator.jsx';
+---
+
+<BaseLayout
+  title="Split sheet generator — free, printable, no signup"
+  description="Generate a professional songwriter split sheet PDF in under two minutes. Free, no account required. Supports multiple writers, PROs, IPI numbers, and publisher info."
+>
+  <article class="max-w-3xl">
+    <h1 class="serif text-4xl mb-3">Split sheet generator</h1>
+    <p class="text-ink-soft text-lg mb-8">
+      A proper, printable split sheet in under two minutes. Fill in the writers,
+      set the percentages, hit download. Print, sign, keep a copy each.
+    </p>
+
+    <SplitSheetGenerator client:load />
+
+    <section class="prose mt-14">
+      <h2>What a split sheet is (and why you need one)</h2>
+      <p>
+        A split sheet is a one-page document that records who wrote what
+        percentage of a song. It's signed by every co-writer. It is the single
+        most important piece of paper in a songwriter's career — and the one
+        most often skipped.
+      </p>
+      <p>
+        If there's ever a dispute, a sync opportunity, a royalty audit, or a
+        registration at a PRO, a signed split sheet is the thing that settles
+        it. Without one, you're relying on memory, text messages, and vibes —
+        and vibes have lost a lot of writers a lot of money.
+      </p>
+
+      <h3>Fill it out in the room</h3>
+      <p>
+        The best time to do a split sheet is the day the song is finished, in
+        the same room as the other writers. Not next week. Not "when the demo
+        is done." That day. It takes ninety seconds. The conversation gets
+        harder every week you put it off.
+      </p>
+
+      <h3>What the fields mean</h3>
+      <p>
+        <strong>PRO affiliation</strong> is the performing rights organisation
+        you're registered with — PRS (UK), ASCAP / BMI / SESAC (US), SOCAN
+        (Canada), APRA (AU/NZ), and so on. A writer can only be registered with
+        one at a time. Unaffiliated is fine — you can join later and re-register.
+      </p>
+      <p>
+        <strong>IPI / CAE number</strong> is your unique global songwriter ID,
+        issued when you join a PRO. Optional but useful — it makes registering
+        the song at every collection society around the world unambiguous.
+      </p>
+      <p>
+        <strong>Publisher</strong> is the entity that administers the
+        publishing side of the song. If you haven't signed a publishing deal,
+        you <em>are</em> your publisher — you can write "self-published" or your
+        own company name. Publishers often have their own PRO registration, which
+        can be different from the writer's.
+      </p>
+
+      <h3>Splitting the song</h3>
+      <p>
+        The default for most co-writes is to split evenly — if three people
+        were in the room, everyone gets a third. Not because every contribution
+        was mathematically equal, but because accounting for every lyric and
+        melodic phrase is usually more trouble than it's worth, and goodwill is
+        more valuable than two percentage points.
+      </p>
+      <p>
+        There are exceptions. If one writer came in with the song 80% finished
+        and the others added a bridge, an uneven split makes sense. If a
+        producer wrote a significant melodic hook, they're a writer, and that
+        needs to be in the split. Sort it out in the room, before the song goes
+        anywhere.
+      </p>
+
+      <h3>What this generator does and doesn't do</h3>
+      <p>
+        It generates a clean, professional split sheet PDF with all the fields
+        a publisher or PRO will want. You print it, each writer signs it, and
+        everyone keeps a copy.
+      </p>
+      <p>
+        It doesn't handle digital signatures. For that you'd need every writer
+        to have an account with an e-signature service, which is more friction
+        than most co-writes deserve. Print and sign is fine — that's what the
+        industry has always done.
+      </p>
+      <p>
+        Everything happens in your browser. Nothing is sent to a server, stored,
+        or tracked. Close the tab and the data is gone.
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Related</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/resources" class="hover:text-accent">Printable resources & industry links</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/songstarter" class="hover:text-accent">Songstarter</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools" class="hover:text-accent">All tools</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>

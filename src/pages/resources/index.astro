@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const printables = [
+  {
+    href: '/resources/split-sheet-blank.pdf',
+    name: 'Blank split sheet',
+    desc: 'Printable split sheet. Fill in the writers, shares, PROs, and signatures by hand. Two pages — one for splits, one for signatures.',
+  },
+  {
+    href: '/resources/co-write-agreement-blank.pdf',
+    name: 'Co-write agreement',
+    desc: 'A short, plain-English agreement between co-writers covering ownership, administration, sync consent, and good-faith cooperation.',
+  },
+  {
+    href: '/resources/release-checklist.pdf',
+    name: 'Release & metadata checklist',
+    desc: 'Everything that should be locked down before a song goes live: ISRC/ISWC, splits, registrations, credits, artwork, and post-release actions.',
+  },
+  {
+    href: '/resources/session-tracking-sheet.pdf',
+    name: 'Session & demo tracking sheet',
+    desc: 'Capture who was in the room, the key and tempo, chord progressions, demo filenames, and action items — while you still remember.',
+  },
+];
+
+const uk = [
+  {
+    name: 'PRS for Music',
+    url: 'https://www.prsformusic.com',
+    what: 'UK performing rights — collects performance royalties when your songs are played on radio, TV, and in public venues.',
+  },
+  {
+    name: 'MCPS',
+    url: 'https://www.prsformusic.com/what-we-do/who-we-represent/songwriters-and-composers/mcps-membership',
+    what: 'UK mechanical rights — collects royalties when your songs are reproduced (streams, downloads, CDs, vinyl).',
+  },
+  {
+    name: 'PPL',
+    url: 'https://www.ppluk.com',
+    what: 'UK neighbouring rights — collects for performers and recording owners when recordings are played publicly. Separate from PRS.',
+  },
+  {
+    name: 'Sentric Music',
+    url: 'https://www.sentricmusic.com',
+    what: 'UK-based publishing administrator. Free tier for independent songwriters — collects worldwide publishing income.',
+  },
+  {
+    name: 'The Ivors Academy',
+    url: 'https://ivorsacademy.com',
+    what: 'UK professional body for songwriters and composers. Advocacy, education, and the Ivor Novello Awards.',
+  },
+];
+
+const usGlobal = [
+  {
+    name: 'ASCAP',
+    url: 'https://www.ascap.com',
+    what: 'US performing rights org. Free to join for songwriters. Collects performance royalties in the US.',
+  },
+  {
+    name: 'BMI',
+    url: 'https://www.bmi.com',
+    what: 'US performing rights org. Free for songwriters. Direct competitor to ASCAP — you can only join one.',
+  },
+  {
+    name: 'SESAC',
+    url: 'https://www.sesac.com',
+    what: 'US performing rights org. Invite-only. Smaller, boutique roster — generally considered for established writers.',
+  },
+  {
+    name: 'Songtrust',
+    url: 'https://www.songtrust.com',
+    what: 'Publishing administrator. Paid flat fee, registers your songs at every collection society worldwide and collects the money most writers leave on the table.',
+  },
+  {
+    name: 'CD Baby Pro / Publishing',
+    url: 'https://cdbaby.com/publishing',
+    what: 'Combined distribution + publishing administration for independent artists. Convenient if you already distribute via CD Baby.',
+  },
+  {
+    name: 'AMRA',
+    url: 'https://www.amra.com',
+    what: 'Digital collection society focused on global streaming royalties. Often partners with other PROs rather than replacing them.',
+  },
+  {
+    name: 'The MLC',
+    url: 'https://www.themlc.com',
+    what: 'The US Mechanical Licensing Collective. Collects mechanical royalties from US streams — you should register if you self-publish.',
+  },
+  {
+    name: 'SOCAN',
+    url: 'https://www.socan.com',
+    what: "Canada's performing rights org. Covers performance, mechanical, and reproduction rights.",
+  },
+  {
+    name: 'APRA AMCOS',
+    url: 'https://www.apraamcos.com.au',
+    what: 'Australia and New Zealand performing and mechanical rights.',
+  },
+  {
+    name: 'SoundExchange',
+    url: 'https://www.soundexchange.com',
+    what: 'US digital performance royalties for sound recordings (non-interactive streams like Pandora, SiriusXM). Performer + master owner income.',
+  },
+];
+---
+
+<BaseLayout
+  title="Resources — printables & industry links for songwriters"
+  description="Free printable split sheets, co-write agreements, release checklists, plus a hand-curated list of the publishing admins, PROs, and collection societies every working songwriter should know."
+>
+  <article class="max-w-4xl">
+    <h1 class="serif text-4xl mb-3">Resources</h1>
+    <p class="text-ink-soft text-lg mb-10 max-w-2xl">
+      Printable templates you can download, print, and fill in. Plus a curated
+      directory of the publishing administrators, performing rights
+      organisations, and collection societies every working songwriter should
+      know about.
+    </p>
+
+    <section class="mb-14">
+      <h2 class="serif text-2xl mb-2">Printable templates</h2>
+      <p class="text-ink-muted text-sm mb-6 max-w-2xl">
+        Blank PDFs designed to be printed and signed by hand. Keep them in a
+        folder, a Dropbox, or tape them to your studio wall.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        {printables.map((p) => (
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener"
+            class="block p-5 rounded-lg border border-ink/10 bg-paper-warm no-underline hover:border-accent transition"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="serif text-lg">{p.name}</div>
+              <span class="text-xs uppercase tracking-wider text-ink-muted">PDF</span>
+            </div>
+            <div class="text-sm text-ink-soft">{p.desc}</div>
+            <div class="text-xs text-accent mt-3">Download →</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <h2 class="serif text-2xl mb-2">Industry directory</h2>
+      <p class="text-ink-muted text-sm mb-6 max-w-2xl">
+        A non-exhaustive list of the organisations that handle the money side
+        of songwriting. Not affiliate links. Not endorsements. Just who does
+        what, so you can find the right door to knock on.
+      </p>
+
+      <div class="mb-10">
+        <h3 class="serif text-xl mb-4">UK & Ireland</h3>
+        <div class="space-y-3">
+          {uk.map((o) => (
+            <div class="p-4 rounded-lg border border-ink/10">
+              <div class="flex items-baseline justify-between gap-4 flex-wrap mb-1">
+                <a href={o.url} target="_blank" rel="noopener" class="serif text-lg no-underline hover:text-accent">
+                  {o.name} ↗
+                </a>
+                <span class="text-xs text-ink-muted truncate max-w-[50%]">{o.url.replace(/^https?:\/\//, '')}</span>
+              </div>
+              <div class="text-sm text-ink-soft">{o.what}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="serif text-xl mb-4">US & Global</h3>
+        <div class="space-y-3">
+          {usGlobal.map((o) => (
+            <div class="p-4 rounded-lg border border-ink/10">
+              <div class="flex items-baseline justify-between gap-4 flex-wrap mb-1">
+                <a href={o.url} target="_blank" rel="noopener" class="serif text-lg no-underline hover:text-accent">
+                  {o.name} ↗
+                </a>
+                <span class="text-xs text-ink-muted truncate max-w-[50%]">{o.url.replace(/^https?:\/\//, '')}</span>
+              </div>
+              <div class="text-sm text-ink-soft">{o.what}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>Which of these do I actually need?</h2>
+      <p>
+        If you're a songwriter — not a performing artist — the short answer is:
+        one PRO (ASCAP, BMI, PRS, SOCAN, APRA etc. — whichever covers your
+        country), and one publishing administrator (Songtrust, Sentric, CD
+        Baby, etc.). That gets you the majority of the money your songs earn
+        globally.
+      </p>
+      <p>
+        If you're also the performer on the recording, add PPL (UK) or
+        SoundExchange (US) to collect your neighbouring-rights income, which is
+        a separate pot of money with your name on it.
+      </p>
+      <p>
+        If you self-publish in the US, register with The MLC so you get the
+        mechanical royalties from US streams. Everyone else's admin covers this
+        automatically.
+      </p>
+
+      <h3>A note on choosing between them</h3>
+      <p>
+        Most of these services won't move the needle massively for a writer
+        earning under a few hundred pounds a year. But they will stop you
+        missing out on money that's <em>already been collected with your name
+        on it</em> — money that gets written off as "unmatched" if nobody
+        claims it. The difference between signing up and not is the difference
+        between "I don't earn much from songwriting" and "I earn the same
+        amount, but actually receive it."
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Tools</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/tools/split-sheet" class="hover:text-accent">Split sheet generator</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/songstarter" class="hover:text-accent">Songstarter</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools" class="hover:text-accent">All tools</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>
