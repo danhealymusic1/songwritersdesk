@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { isBlocked } from '../../data/blocked-rhymes.js';
 
 const DATAMUSE = 'https://api.datamuse.com/words';
 
@@ -40,12 +41,12 @@ export default function SlantRhymeFinder() {
         fetchRel({ sl: clean }),
       ]);
 
-      // Dedupe by word — preference order matches the category we want to surface it in
+      // Dedupe by word and filter blocked suggestions.
       const seen = new Set([clean]);
       const pick = (list) =>
         list.filter((w) => {
           const key = w.word?.toLowerCase();
-          if (!key || seen.has(key)) return false;
+          if (!key || seen.has(key) || isBlocked(key)) return false;
           seen.add(key);
           return true;
         });
