@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tools = [
+  {
+    href: '/tools/songstarter',
+    name: 'Songstarter',
+    tagline: 'Specific song starting points based on who you are, how you feel, and the vibe you want.',
+    status: 'live',
+  },
+  {
+    href: '/tools/slant-rhymes',
+    name: 'Slant rhyme finder',
+    tagline: 'Near-rhymes, multi-syllable rhymes, assonance. Tuned for modern songwriting.',
+    status: 'coming-soon',
+  },
+  {
+    href: '/tools/split-sheet',
+    name: 'Split sheet generator',
+    tagline: 'A proper printable split sheet in under two minutes. Free, no signup.',
+    status: 'coming-soon',
+  },
+  {
+    href: '/tools/royalty-calculator',
+    name: 'Royalty split calculator',
+    tagline: "Punch in the streams, see what each writer actually receives.",
+    status: 'coming-soon',
+  },
+  {
+    href: '/tools/song-title-generator',
+    name: 'Song title generator',
+    tagline: 'Titles by mood, genre, or theme. Filterable from cryptic to literal.',
+    status: 'coming-soon',
+  },
+  {
+    href: '/tools/song-structure',
+    name: 'Song structure builder',
+    tagline: 'Pick a structure, see named examples, export a template.',
+    status: 'coming-soon',
+  },
+];
+---
+
+<BaseLayout
+  title="Songwriter tools"
+  description="Free tools for songwriters: song idea generator, slant rhyme finder, split sheet generator, royalty calculator, and more."
+>
+  <section class="mb-10">
+    <h1 class="serif text-4xl mb-3">The tools</h1>
+    <p class="text-ink-soft max-w-2xl">
+      Free, fast, and made by a working songwriter. Every tool has a proper guide
+      underneath it explaining what it's for and how to use it well.
+    </p>
+  </section>
+
+  <div class="grid sm:grid-cols-2 gap-5">
+    {tools.map((tool) => (
+      <a
+        href={tool.status === 'live' ? tool.href : '#'}
+        class={`block p-6 rounded-lg border no-underline transition ${
+          tool.status === 'live'
+            ? 'border-ink/10 hover:border-accent bg-paper-warm'
+            : 'border-ink/10 opacity-60 cursor-default bg-paper'
+        }`}
+      >
+        <div class="flex items-baseline justify-between mb-1">
+          <div class="serif text-xl">{tool.name}</div>
+          {tool.status !== 'live' && (
+            <span class="text-xs uppercase tracking-wider text-ink-muted">Coming soon</span>
+          )}
+        </div>
+        <div class="text-sm text-ink-muted">{tool.tagline}</div>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

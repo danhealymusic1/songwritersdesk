@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Songstarter from '../../components/tools/Songstarter.jsx';
+---
+
+<BaseLayout
+  title="Songstarter — specific song starting points"
+  description="Turn a mood, a life situation and a vibe into a concrete starting point for a song. Free tool by The Songwriter's Desk."
+>
+  <article class="max-w-3xl">
+    <h1 class="serif text-4xl mb-3">Songstarter</h1>
+    <p class="text-ink-soft text-lg mb-8">
+      Tell it who you are, how you feel, and the vibe you want. It gives you a
+      specific situation to mine, a perspective, an opening line to react to,
+      and a key/tempo to try.
+    </p>
+
+    <Songstarter client:load />
+
+    <section class="prose mt-14">
+      <h2>How to use Songstarter well</h2>
+
+      <p>
+        This tool doesn't write your song for you. It gives you five specific
+        constraints, which is usually what a blank page is actually missing.
+        The trick is to treat the output as <em>something to argue with</em>,
+        not something to obey.
+      </p>
+
+      <h3>Be specific in the inputs</h3>
+      <p>
+        "Sad" will give you a sad cliché. "Quietly resentful of my sister"
+        will give you a song. The more grown-up and specific your mood word,
+        the more useable the output.
+      </p>
+
+      <h3>Don't accept the first starter</h3>
+      <p>
+        Hit <em>Another</em> three or four times. The first starter is
+        almost never the one. Often the fourth one hits a nerve you didn't
+        know you had.
+      </p>
+
+      <h3>Ignore the parts that don't fit</h3>
+      <p>
+        If the key suggestion is wrong, ignore it. If the perspective feels
+        forced, ignore it. Take the one thing that landed and go.
+      </p>
+
+      <h3>Use the metaphor territory as your only rule</h3>
+      <p>
+        If it says "water × old machines", try writing the entire song
+        without any words from outside those two territories. You'll be
+        surprised what comes out.
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Related tools</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/tools/slant-rhymes" class="hover:text-accent">Slant rhyme finder</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/song-title-generator" class="hover:text-accent">Song title generator</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/song-structure" class="hover:text-accent">Song structure builder</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>

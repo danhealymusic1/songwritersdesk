@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter((p) => !p.data.draft)
+    .map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="prose mx-auto">
+    <div class="text-sm text-ink-muted mb-2">
+      {post.data.pubDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {post.data.author && (<span> · {post.data.author}</span>)}
+    </div>
+    <h1 class="serif text-4xl mb-6 leading-tight">{post.data.title}</h1>
+    <div class="text-lg text-ink-soft mb-10">{post.data.description}</div>
+    <Content />
+
+    <hr class="my-14 border-ink/10" />
+
+    <p class="text-sm text-ink-muted">
+      Written by {post.data.author}. If this was useful, the
+      <a href="/tools">tools page</a> has more like it, and the
+      homepage has a newsletter signup.
+    </p>
+  </article>
+</BaseLayout>
