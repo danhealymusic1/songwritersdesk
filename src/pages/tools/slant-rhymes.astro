@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SlantRhymeFinder from '../../components/tools/SlantRhymeFinder.jsx';
+---
+
+<BaseLayout
+  title="Slant rhyme finder — near, half, and multi-syllable rhymes"
+  description="Find slant rhymes, near rhymes, multi-syllable rhymes, consonance, and assonance. Tuned for modern songwriting. Free, no signup."
+>
+  <article class="max-w-3xl">
+    <h1 class="serif text-4xl mb-3">Slant rhyme finder</h1>
+    <p class="text-ink-soft text-lg mb-8">
+      Near-rhymes, multi-syllable rhymes, consonance, and assonance — all in one
+      search. Built for songwriters who'd rather surprise a listener than hit
+      them with <em>moon / June</em>.
+    </p>
+
+    <SlantRhymeFinder client:load />
+
+    <section class="prose mt-14">
+      <h2>What a slant rhyme is</h2>
+      <p>
+        A slant rhyme (also called a near rhyme, half rhyme, oblique rhyme, or
+        imperfect rhyme) is a rhyme where the sounds don't match perfectly —
+        but they match closely enough that the ear accepts them as rhymes. It's
+        the difference between <em>heart / start</em> (perfect) and
+        <em>heart / hard</em> (slant). Both work. The second one is interesting.
+      </p>
+      <p>
+        Every great modern lyricist lives here. Taylor Swift rhymes
+        "problems" with "involved". Kendrick rhymes "hypocrite" with
+        "intricate". Paul Simon rhymes "Corona" with "afternoon". Perfect rhyme
+        is decorative; slant rhyme is expressive. You use slant rhymes when the
+        word you <em>need</em> for meaning doesn't happen to rhyme with
+        anything on your list — and you'd rather bend the sound than bend the
+        song.
+      </p>
+
+      <h2>Why modern songwriting leans on slant rhymes</h2>
+      <p>
+        English has a small number of perfectly rhyming pairs relative to its
+        vocabulary. If you restrict yourself to perfect rhymes, you end up in
+        the same twelve couplets everyone else is stuck in — <em>heart / start
+        / apart</em>, <em>fire / desire / higher</em>, <em>night / light /
+        right</em>. Audiences have heard these combinations ten thousand times.
+        A slant rhyme feels fresh because it breaks the pattern the ear is
+        predicting.
+      </p>
+      <p>
+        There's also a craft reason. Perfect rhymes draw attention to the rhyme
+        itself — they click shut like a lid. Slant rhymes keep the line
+        breathing. In a conversational lyric, the tightness of
+        <em>perfect rhyme</em> can feel stiff and song-shaped in the wrong way.
+        A softer match — <em>river / silver</em>, <em>hollow / follow /
+        shadow</em> — lets you hold a thought open instead of punctuating it.
+      </p>
+
+      <h2>The five flavours of slant rhyme</h2>
+
+      <h3>1. Near rhyme</h3>
+      <p>
+        The catch-all. Any rhyme where the vowels or final consonants don't
+        match exactly. <em>Moon / mine</em>. <em>Worry / hurry</em>.
+        <em>Promise / pieces</em>. These are the ones most writers mean when they
+        say "slant rhyme" informally. The finder above returns a generous list.
+      </p>
+
+      <h3>2. Consonance</h3>
+      <p>
+        Same final consonant sound, different vowel. <em>Wind / found</em>.
+        <em>Hope / keep</em>. <em>Love / live</em>. This is the most forgiving
+        kind of slant rhyme — you can end the line with almost any word
+        provided it ends with the right consonant cluster. Very common in hip-hop
+        multis.
+      </p>
+
+      <h3>3. Assonance</h3>
+      <p>
+        Same vowel sound, different consonants. <em>Rise / light</em>.
+        <em>Mellow / echo</em>. <em>Heart / far</em>. Assonance is how you make
+        a line feel coherent without punching a rhyme — the vowels chime
+        internally and the ear registers it as a musical relationship rather
+        than a bell ringing.
+      </p>
+
+      <h3>4. Multi-syllable rhymes</h3>
+      <p>
+        Rhymes that extend over two or more syllables. <em>Paradise / harmonize</em>
+        is a multi. <em>Rhythm and blues / hits you and moves</em> is a multi.
+        Hip-hop lives here; modern pop flirts with it; country uses it sparingly
+        for emphasis. A great multi-syllable rhyme is the most technically
+        impressive thing you can do in a lyric, and the finder pulls these out
+        as their own category.
+      </p>
+
+      <h3>5. Eye rhyme (false friend)</h3>
+      <p>
+        Words that look like they rhyme on the page but don't out loud —
+        <em>love / move</em>, <em>good / food</em>. Songwriters should mostly
+        avoid these. Your listeners hear the song; they don't read it. This
+        finder doesn't surface eye rhymes because in a sung lyric they're a
+        bug, not a feature.
+      </p>
+
+      <h2>How different genres use slant rhymes</h2>
+
+      <h3>Hip-hop</h3>
+      <p>
+        Hip-hop is where slant rhyme reaches its highest form — specifically
+        the multi-syllable slant rhyme. A great rap verse might have
+        four-syllable rhyme chains repeating across a bar, with the vowels
+        matching and the consonants drifting. Eminem, Kendrick Lamar, MF DOOM,
+        Black Thought — study any of them for a week and you'll never write
+        <em>cat / hat</em> again.
+      </p>
+
+      <h3>Country</h3>
+      <p>
+        Country traditionally prefers clean, perfect rhymes — the genre
+        rewards clarity and directness, and slant rhymes can muddy a lyric
+        that's trying to be plainspoken. But modern country, especially in the
+        Nashville "bro-country" and Americana worlds, uses slant rhymes for
+        contemporary feel. Kacey Musgraves, Chris Stapleton, Jason Isbell all
+        lean on near-rhymes where it serves the line.
+      </p>
+
+      <h3>Indie pop and alternative</h3>
+      <p>
+        Slant rhyme everywhere. Phoebe Bridgers, The National, Lorde, Bon Iver
+        — this whole sonic family treats perfect rhyme as almost cheesy. The
+        lyric aesthetic is conversational, half-spoken, and slant rhymes keep
+        it that way. If you're writing in this lane, the finder above is
+        essentially mandatory.
+      </p>
+
+      <h3>Mainstream pop</h3>
+      <p>
+        Pop sits in the middle. Hooks tend to rhyme perfectly because the
+        clicking-shut feeling is part of what makes a chorus memorable.
+        Verses often relax into slant rhymes for breath. Most Max Martin songs
+        follow this rule: tight pre-chorus and chorus, looser verses.
+      </p>
+
+      <h2>How to use the tool well</h2>
+      <p>
+        Type a specific, concrete word. <em>Midnight</em> produces better
+        results than <em>night</em>. <em>Paradise</em> better than
+        <em>place</em>. The more interesting the input, the more interesting
+        the options — and multi-syllable rhymes only work when the input itself
+        has multiple syllables.
+      </p>
+      <p>
+        Don't take the first match. The best rhyme in any list is rarely at
+        the top. Scroll the near rhymes, scroll the consonance — you're looking
+        for a word that <em>means something</em> in your song, that happens to
+        rhyme. Meaning first, rhyme second. A beautiful slant rhyme between
+        two words that don't earn their place in the line is worse than a
+        perfect rhyme between two words that do.
+      </p>
+      <p>
+        Click any word to copy it. The URL updates with your search, so you
+        can bookmark a rhyme set and come back to it.
+      </p>
+
+      <h2>Common mistakes</h2>
+      <p>
+        <strong>Treating slant rhymes as a licence to be lazy.</strong> A slant
+        rhyme is a craft choice, not a shortcut. If you're reaching for a near
+        rhyme because you couldn't find a perfect one and couldn't be bothered
+        to re-write the line, the listener will feel the slackness. Use slant
+        rhyme where it <em>sounds better</em> than the perfect alternative, not
+        just where it's easier.
+      </p>
+      <p>
+        <strong>Too many slants in a row.</strong> If every rhyme in a verse is
+        slant, the ear loses the anchor. A good ratio in most genres is
+        perfect-at-the-hook, slant-in-the-verses. Or: slant your first three
+        rhymes, then drop a perfect one on the payoff line. Contrast is what
+        makes either kind of rhyme do work.
+      </p>
+      <p>
+        <strong>Rhyming things that nobody pronounces the way you do.</strong>
+        Dialect kills slant rhymes. If you pronounce <em>water</em> as
+        <em>wuh-TAH</em> and your listener pronounces it <em>WAH-der</em>, your
+        clever near-rhyme may not land. Read the lyric out loud in an average
+        accent before you commit.
+      </p>
+
+      <h2>About the data</h2>
+      <p>
+        The finder pulls from <a href="https://www.datamuse.com/api/" rel="noopener" target="_blank">Datamuse</a>,
+        which is the same linguistic corpus RhymeZone and OneLook use. Results
+        are scored by phonetic proximity and filtered by the tool to separate
+        multi-syllable from single-syllable matches, consonance from assonance.
+        Nothing is stored; no account required; your searches don't get logged
+        or sold.
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Related</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/tools/songstarter" class="hover:text-accent">Songstarter</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/split-sheet" class="hover:text-accent">Split sheet generator</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/resources" class="hover:text-accent">Printable resources</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools" class="hover:text-accent">All tools</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>
