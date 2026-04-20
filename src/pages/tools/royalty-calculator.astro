@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RoyaltyCalculator from '../../components/tools/RoyaltyCalculator.jsx';
+---
+
+<BaseLayout
+  title="Royalty split calculator — what each songwriter actually earns from streams"
+  description="Punch in your streams, see what each writer actually receives after publisher splits. Free, no signup. Built by a working songwriter."
+>
+  <article class="max-w-3xl">
+    <h1 class="serif text-4xl mb-3">Royalty split calculator</h1>
+    <p class="text-ink-soft text-lg mb-8">
+      Enter your streams per platform, your writer shares, and your publisher
+      cut. The calculator shows what each writer actually receives — not the
+      headline "Spotify pays $0.003 per stream" number, which is the wrong
+      number to care about if you're a songwriter.
+    </p>
+
+    <RoyaltyCalculator client:load />
+
+    <section class="prose mt-14">
+      <h2>What this tool does (and doesn't)</h2>
+      <p>
+        This calculates your <strong>songwriter-side</strong> royalty — the
+        money that flows to you and your co-writers because you wrote the
+        song. It does <em>not</em> calculate the master-recording royalty,
+        which is a separate stream of money that goes to whoever owns the
+        recording (usually the label, or the artist if they're independent).
+        Those are two completely different pots of money, and confusing them
+        is the single biggest reason people think songwriting royalties are
+        higher or lower than they actually are.
+      </p>
+      <p>
+        Every time a song is streamed, the platform pays out roughly
+        $0.003–$0.005 in total royalties. But only a slice of that — usually
+        somewhere between 15% and 25% — is the songwriter's share. The rest
+        goes to the master side. When you see the headline "Spotify pays
+        $0.003 per stream", that is the total rights-holder payout, not what
+        the songwriter gets. What the songwriter gets is the number in this
+        calculator.
+      </p>
+
+      <h2>Mechanical vs performance royalties</h2>
+      <p>
+        Songwriter royalties actually come in two flavours, and the
+        calculator rolls them into a single per-stream number because you
+        almost never receive them separately and the total is what matters
+        for planning.
+      </p>
+      <p>
+        <strong>Mechanical royalties</strong> are paid every time a copy of
+        your song is made — and in streaming law, every stream counts as a
+        copy. In the US, mechanicals on interactive streams are set by the
+        Copyright Royalty Board (currently around $0.0015–$0.002 per stream,
+        paid to the publisher and songwriter). Your mechanical royalties
+        usually arrive via a distributor like DistroKid, CD Baby, or
+        TuneCore if you're unpublished, or via a publishing admin like
+        Songtrust, Sentric, or your publisher if you're signed.
+      </p>
+      <p>
+        <strong>Performance royalties</strong> are paid every time your song
+        is performed — including digitally. Streaming counts as a
+        performance too, and platforms pay a performance fee on top of the
+        mechanical. In the US these flow through a PRO (ASCAP, BMI, or
+        SESAC). Outside the US, PRS in the UK, SOCAN in Canada, GEMA in
+        Germany, and so on. Every country has its own collection society.
+      </p>
+      <p>
+        Added together, a modest estimate for total songwriter-side payout
+        from one Spotify stream in the US is around $0.0004–$0.0006,
+        depending on subscription tier, region, and whether the listener is
+        ad-supported or premium. The calculator defaults to $0.00050 for
+        Spotify and similar blended figures for the other platforms. You
+        can edit every rate — if you have better data from a recent payout
+        statement, punch it in.
+      </p>
+
+      <h2>Why the per-stream rates look so different</h2>
+      <p>
+        Apple Music pays more than Spotify per stream because Apple has no
+        free tier — every listener is a paying subscriber, and paying
+        subscribers generate a bigger pool of royalties per capita. Tidal
+        pays even more because their HiFi tier is the most expensive in
+        streaming, so the pool per listener is higher. YouTube Music pays
+        more than YouTube's ad-supported tier for the same reason. And
+        ad-supported YouTube pays the least of anyone because ad revenue
+        per listener is tiny compared to subscription revenue.
+      </p>
+      <p>
+        Amazon Music sits in the middle. Smaller services like Deezer,
+        Anghami, and Boomplay tend to cluster around the Spotify number,
+        and some regional platforms pay meaningfully less. If you have
+        significant streams on a platform not listed in the calculator, add
+        it manually or use the Spotify rate as a rough proxy.
+      </p>
+
+      <h2>How writer splits work</h2>
+      <p>
+        When a song has multiple writers, the total songwriter-side royalty
+        pool is divided by the agreed writer shares. If three of you wrote
+        the song 40/30/30, the writer who owns 40% receives 40% of the
+        songwriter pool, and so on. This is what a split sheet nails down
+        the day you write the song — which is exactly what our
+        <a href="/tools/split-sheet">split sheet generator</a> produces.
+      </p>
+      <p>
+        The numbers only work if the shares total exactly 100%. The
+        calculator refuses to calculate until they do, and flags the total
+        in red if it's off. "Split evenly" handles the rounding for you
+        when you've got three writers and don't want to argue about the
+        extra 0.01%.
+      </p>
+
+      <h2>Publisher take explained</h2>
+      <p>
+        If you're signed to a publisher (or to a publishing administrator,
+        which is the same idea with a smaller cut), they take a percentage
+        of <em>your</em> share before the money hits your account. That
+        percentage is what the "Pub take %" column captures.
+      </p>
+      <p>
+        Typical rates: a traditional publisher takes 25–50% of your
+        royalties in exchange for advance money and active song-pitching.
+        An administrator (Songtrust, Sentric, Kobalt's entry-level tier)
+        typically takes 10–20% and doesn't give you an advance — they just
+        register your songs globally and collect the money. If you're
+        self-published, the pub take is 0% and the full writer share lands
+        in your bank account.
+      </p>
+      <p>
+        Set each writer's publisher percentage independently. One writer
+        might be signed to Warner Chappell at 25% while their co-writer is
+        signed to Songtrust at 15% and a third is self-published. The
+        calculator handles each writer's pub cut separately.
+      </p>
+
+      <h2>What the headline per-stream number obscures</h2>
+      <p>
+        People quote "Spotify pays $0.003 per stream" as if it's a fact
+        about what songwriters earn. It isn't. That number is the total
+        royalty pool Spotify pays out per stream. Of that:
+      </p>
+      <ul>
+        <li>Roughly 55–60% goes to the master recording rights holder (the label)</li>
+        <li>Roughly 15–25% goes to the songwriter side (you)</li>
+        <li>Roughly 15–20% Spotify keeps as their margin</li>
+      </ul>
+      <p>
+        So when you see Spotify's per-stream number, mentally cut it by
+        roughly 80% to get the songwriter share, and then split that by
+        your writer percentage, and then subtract your publisher's cut.
+        That's the number this calculator produces. It feels smaller than
+        the headline number because it <em>is</em> smaller, and knowing
+        the real number is the difference between budgeting accurately and
+        being disappointed every quarter.
+      </p>
+
+      <h2>US vs UK/EU variations</h2>
+      <p>
+        Outside the US, the split between mechanical and performance
+        royalties is different, and the total songwriter pool can be
+        slightly higher because many European countries have stronger
+        statutory minimums for streaming mechanicals. UK and EU streams
+        tend to pay 10–20% more to the songwriter side than US streams,
+        once you account for collection society efficiency and exchange
+        rate. Latin American and Asian streams typically pay less, often
+        significantly so.
+      </p>
+      <p>
+        The defaults in this calculator are US figures. If your audience
+        is mostly European, bump the rates up by 10–15%. If mostly Latin
+        America or Southeast Asia, bump them down by 20–30%. These
+        adjustments won't be exact but they'll be closer than assuming US
+        rates apply worldwide.
+      </p>
+
+      <h2>How to read your actual payout statement</h2>
+      <p>
+        When royalty statements arrive (usually quarterly from distributors
+        and admins, semi-annually from PROs and traditional publishers),
+        they'll be maddeningly detailed — broken out by territory,
+        platform, subscription tier, and rights type. Use this calculator
+        as a rough sanity check: if your statement says you earned $40 on
+        100,000 Spotify streams but the calculator says you should have
+        earned $50, the difference is probably territory mix plus the
+        admin's own cut. If the difference is more than 30%, ask
+        questions.
+      </p>
+      <p>
+        Keep statements. They become important at tax time, when
+        negotiating publishing deals, and when tracking whether a song is
+        actually working for you commercially.
+      </p>
+
+      <h2>Common mistakes</h2>
+      <p>
+        <strong>Confusing master and songwriter royalties.</strong> If
+        you're both the artist and the songwriter, you receive both — but
+        they come from different sources on different schedules and often
+        through different companies. Adding them together and assuming
+        one source will pay everything is how people end up chasing money
+        that never arrives.
+      </p>
+      <p>
+        <strong>Ignoring the publisher cut on planning.</strong> If you're
+        signed to an admin at 15%, a projected $1,000 quarter is actually
+        $850. Budget for the real number, not the gross number.
+      </p>
+      <p>
+        <strong>Expecting streaming to pay a living wage from modest
+        numbers.</strong> A million streams sounds like a lot, and it is —
+        but even at Apple Music rates across all writers and no publisher
+        cut, a million streams pays roughly $1,100 on the songwriter side.
+        Streaming royalties are best understood as a long tail, not a
+        salary. They matter when songs compound across years and
+        catalogues — not from the first single in month one.
+      </p>
+
+      <h2>About the rates</h2>
+      <p>
+        Per-stream rates in the calculator are approximate industry
+        averages for 2024, US territory, combining mechanical and
+        performance royalties on the songwriter side. They come from
+        aggregated payout reports, industry publications like Billboard and
+        Music Business Worldwide, and cross-referenced with distributor
+        royalty calculators. They are not guarantees. Your actual rates
+        will vary based on subscription tier mix, territory, currency
+        conversion, and whether Spotify is in a pricing dispute with
+        anyone that quarter.
+      </p>
+      <p>
+        Every rate in the calculator is editable. If a platform sends you a
+        statement with exact numbers, use those instead. The tool is built
+        to be transparent about its assumptions, not to pretend it knows
+        your specific payout to the penny.
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Related</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/tools/split-sheet" class="hover:text-accent">Split sheet generator</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/slant-rhymes" class="hover:text-accent">Slant rhyme finder</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/songstarter" class="hover:text-accent">Songstarter</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/resources" class="hover:text-accent">Printable resources</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools" class="hover:text-accent">All tools</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>
