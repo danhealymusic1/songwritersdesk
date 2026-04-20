@@ -51,43 +51,18 @@ const posts = (await getCollection('blog'))
         const thanks = document.getElementById('subscribe-thanks-state');
         if (!form || !thanks) return;
 
-        const iframe = form.querySelector('iframe[src*="subscribe-forms.beehiiv.com"]');
-        if (!iframe) return;
-
-        let baselineHeight = null;
         let swapped = false;
 
-        function parsePx(v) {
-          if (v == null) return NaN;
-          if (typeof v === 'number') return v;
-          return parseInt(String(v), 10);
-        }
-
         window.addEventListener('message', (event) => {
+          if (swapped) return;
           if (event.origin !== BEEHIIV_ORIGIN) return;
           const data = event.data;
           if (!data || typeof data !== 'object') return;
+          if (data.type !== 'BEEHIIV_SUBSCRIBER_FORM_SUBMITTED') return;
 
-          // Complete the handshake so the iframe starts emitting style updates.
-          if (data.type === 'beehiiv:child-loaded' && iframe.contentWindow) {
-            iframe.contentWindow.postMessage({ type: 'beehiiv:parent-loaded' }, BEEHIIV_ORIGIN);
-            return;
-          }
-
-          if (swapped) return;
-          if (data.type !== 'beehiiv:styles') return;
-          const h = parsePx(data.payload && data.payload.height);
-          if (isNaN(h)) return;
-
-          if (baselineHeight === null || h < baselineHeight) {
-            baselineHeight = h;
-            return;
-          }
-          if (h > baselineHeight + 40) {
-            swapped = true;
-            form.style.display = 'none';
-            thanks.classList.remove('hidden');
-          }
+          swapped = true;
+          form.style.display = 'none';
+          thanks.classList.remove('hidden');
         });
       })();
     </script>
