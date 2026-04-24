@@ -8,25 +8,33 @@ const posts = (await getCollection('blog'))
 ---
 
 <BaseLayout
-  title="Blog"
+  title="The Column"
   description="Honest writing on songwriting craft, the music business, and the songs I'm actually working on."
+  wide={true}
 >
-  <section class="mb-10">
-    <h1 class="serif text-4xl mb-3">Blog</h1>
-    <p class="text-ink-soft max-w-2xl">
+  <section class="max-w-7xl mx-auto px-8 pt-12 pb-8">
+    <div class="folio"><span>§03 — The Column</span><span>Long & short reads</span></div>
+    <h1 class="serif font-light tracking-[-0.04em] leading-[0.95] mt-5" style="font-size: clamp(64px, 10vw, 120px);">
+      The <span class="italic">column</span>.
+    </h1>
+    <p class="text-ink-soft max-w-xl mt-6 text-[17px] leading-relaxed">
       Notes on craft, the business, and the songs I'm actually working on.
     </p>
   </section>
 
-  <ul class="space-y-8">
-    {posts.map((post) => (
-      <li class="border-b border-ink/10 pb-8 last:border-none">
-        <a href={`/blog/${post.slug}`} class="no-underline block">
-          <div class="text-sm text-ink-muted mb-1">
-            {post.data.pubDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+  <div class="border-t border-ink"></div>
+
+  <ul class="max-w-7xl mx-auto">
+    {posts.map((post, i) => (
+      <li class="border-b border-line">
+        <a href={`/blog/${post.slug}`} class="no-underline grid grid-cols-[70px_1fr] md:grid-cols-[70px_110px_1.3fr_2fr_90px] gap-4 md:gap-6 px-8 py-7 items-center hover:bg-paper-warm transition">
+          <div class="serif italic font-light text-accent leading-none" style="font-size:38px;">{String(i+1).padStart(3,'0')}</div>
+          <div class="hidden md:block mono text-[11px] tracking-tracker text-ink-muted uppercase leading-tight">
+            {post.data.pubDate.toLocaleDateString('en-GB', { month: 'short', day: '2-digit' })}<br/>{post.data.pubDate.getFullYear()}
           </div>
-          <h2 class="serif text-2xl mb-1">{post.data.title}</h2>
-          <p class="text-ink-soft">{post.data.description}</p>
+          <div class="serif text-[22px] md:text-[24px] font-medium leading-[1.15] tracking-[-0.01em]">{post.data.title}</div>
+          <div class="hidden md:block text-sm text-ink-muted leading-[1.55]">{post.data.description}</div>
+          <div class="hidden md:flex mono text-[10px] tracking-tracker text-ink-muted uppercase justify-end">Read →</div>
         </a>
       </li>
     ))}

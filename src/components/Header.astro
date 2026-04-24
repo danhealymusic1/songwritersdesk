@@ -1,4 +1,6 @@
 ---
+// Logo option A — staff-line monogram with "note paper"
+// Used as the primary site mark.
 const links = [
   { href: '/tools', label: 'Tools' },
   { href: '/resources', label: 'Resources' },
@@ -6,27 +8,49 @@ const links = [
   { href: '/about', label: 'About' },
 ];
 const { pathname } = Astro.url;
+
+const now = new Date();
+const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const issueLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
 ---
 
-<header class="border-b border-ink/10 bg-paper relative z-10">
-  <div class="max-w-5xl mx-auto px-6 py-5 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-    <a href="/" class="no-underline">
-      <span class="serif text-xl font-bold tracking-tight">The Songwriter's Desk</span>
+<header class="border-b border-ink/20 bg-paper">
+  <div class="max-w-7xl mx-auto px-8 py-6 grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+    <!-- Mark + title -->
+    <a href="/" class="no-underline flex items-center gap-3">
+      <!-- Logo A: staff + italic SD monogram on paper -->
+      <span class="inline-block bg-paper-warm border border-line rounded-sm p-1" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+          <line x1="4" y1="11" x2="36" y2="11" stroke="#1A1814" stroke-width="0.8" />
+          <line x1="4" y1="17" x2="36" y2="17" stroke="#1A1814" stroke-width="0.8" />
+          <line x1="4" y1="23" x2="36" y2="23" stroke="#1A1814" stroke-width="0.8" />
+          <line x1="4" y1="29" x2="36" y2="29" stroke="#1A1814" stroke-width="0.8" />
+          <text x="20" y="26.5" text-anchor="middle" font-family="Fraunces, serif"
+            font-weight="600" font-size="18" font-style="italic" fill="#1A1814">SD</text>
+        </svg>
+      </span>
+      <span>
+        <span class="serif text-[17px] font-medium tracking-tight block leading-none">The Songwriter's Desk</span>
+        <span class="mono text-[9px] tracking-tracker text-ink-muted uppercase block mt-1">Issue N° · {issueLabel}</span>
+      </span>
     </a>
 
-    <a href="/" class="justify-self-center hidden sm:block no-underline" aria-label="Home">
-      <img src="/logo.png" alt="" class="h-12 w-auto" />
-    </a>
+    <!-- Est. line (middle) -->
+    <div class="hidden md:block mono text-[10px] tracking-tracker text-ink-muted uppercase text-center">
+      Est. 2026
+    </div>
 
-    <nav class="flex gap-6 text-sm justify-self-end">
-      {links.map(({ href, label }) => (
-        <a
-          href={href}
-          class={`no-underline hover:text-accent ${pathname.startsWith(href) ? 'text-accent' : 'text-ink-soft'}`}
-        >
-          {label}
-        </a>
-      ))}
+    <!-- Nav -->
+    <nav class="flex gap-7 justify-end text-sm">
+      {links.map(({ href, label }) => {
+        const active = pathname === href || (href !== '/' && pathname.startsWith(href));
+        return (
+          <a
+            href={href}
+            class={`no-underline font-medium ${active ? 'text-accent border-b border-accent pb-[2px]' : 'text-ink hover:text-accent'}`}
+          >{label}</a>
+        );
+      })}
     </nav>
   </div>
 </header>

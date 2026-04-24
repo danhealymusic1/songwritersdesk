@@ -2,28 +2,47 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Flip this to false to switch from coming-soon mode to the full homepage.
+// Flip this to false to switch from coming-soon mode to the full editorial homepage.
 const COMING_SOON = true;
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+// Real tool statuses — keep in sync with /tools/index.astro
+const tools = [
+  { n: '01', t: 'Songstarter', d: 'Specific starting points tuned to mood, genre, and the voice in your head.', status: 'live', href: '/tools/songstarter' },
+  { n: '02', t: 'Slant rhyme finder', d: 'Near-rhymes, multi-syllable rhymes, assonance. For modern songwriting.', status: 'live', href: '/tools/slant-rhymes' },
+  { n: '03', t: 'Split sheet generator', d: 'A proper printable split sheet in under two minutes. Free. No signups.', status: 'live', href: '/tools/split-sheet' },
+  { n: '04', t: 'Royalty split calculator', d: 'Punch in the streams, see what each writer actually receives.', status: 'live', href: '/tools/royalty-calculator' },
+  { n: '05', t: 'Song title generator', d: 'Filter by mood, genre, or theme. Five titles at a time.', status: 'soon', href: '/tools/song-title-generator' },
+  { n: '06', t: 'Song structure builder', d: 'Pick a structure, see named examples, export a template.', status: 'soon', href: '/tools/song-structure' },
+];
 ---
 
-<BaseLayout title="The Songwriter's Desk">
+<BaseLayout title="The Songwriter's Desk" wide={!COMING_SOON}>
   {COMING_SOON ? (
-    <>
-    <section class="max-w-xl mx-auto text-center py-16">
-      <h1 class="serif text-5xl md:text-6xl mb-4 leading-tight">The Songwriter's Desk</h1>
-      <p class="text-lg text-ink-soft mb-2">Tools, templates and honest advice for working songwriters.</p>
-      <p class="text-sm text-ink-muted mb-10">Hosted by Dan Healy.</p>
+    <section class="max-w-3xl mx-auto text-center py-16 px-6">
+      {/* Rubber-stamp logo (Option D) — for homepage hero only */}
+      <div class="flex justify-center mb-10">
+        <span class="stamp-logo">
+          <span class="mono text-[9px] tracking-tracker uppercase text-accent">The</span>
+          <span class="serif italic font-semibold" style="font-size:42px;letter-spacing:-0.02em;">Songwriter's</span>
+          <span class="serif font-semibold" style="font-size:42px;letter-spacing:-0.02em;">Desk</span>
+          <span class="mono text-[8px] tracking-tracker uppercase text-ink-muted mt-1">★ Est 2026 ★</span>
+        </span>
+      </div>
 
-      <div id="subscribe-form-state" class="bg-paper-warm border border-ink/10 rounded-lg p-8 text-left">
-        <h2 class="serif text-xl mb-2">Coming soon.</h2>
-        <p class="text-ink-soft mb-5">
-          A songwriter's toolkit I always wanted — slant-rhyme finder, a song idea generator,
-          a split sheet maker, a royalty calculator, and a blog where I show my working.
+      <p class="text-lg text-ink-soft mb-2 serif italic">Tools, templates and honest advice for working songwriters.</p>
+      <p class="mono text-[10px] tracking-tracker text-ink-muted uppercase mb-12">Hosted by Dan Healy</p>
+
+      <div id="subscribe-form-state" class="bg-paper-warm border border-ink p-8 text-left">
+        <div class="folio mb-4"><span>§ Coming soon</span><span>Newsletter · Free</span></div>
+        <h2 class="serif text-3xl mb-3 leading-tight">One letter a month. <span class="italic text-accent">Never more.</span></h2>
+        <p class="text-ink-soft mb-5 leading-relaxed">
+          A songwriter's toolkit I always wanted — slant-rhyme finder, song idea generator,
+          split sheet maker, royalty calculator, and a blog where I show my working.
         </p>
         <p class="text-ink-soft mb-6 text-sm">Drop your email and I'll tell you when it's live.</p>
 
@@ -34,11 +53,15 @@ const posts = (await getCollection('blog'))
           scrolling="no"
           style="width: 100%; height: 56px; margin: 0; border: 0; background: transparent; display: block;"
         ></iframe>
+        <p class="mono text-[10px] tracking-tracker text-ink-muted uppercase mt-3">
+          No spam · No tracking · Unsubscribe anytime
+        </p>
       </div>
 
-      <div id="subscribe-thanks-state" class="bg-paper-warm border border-ink/10 rounded-lg p-8 text-left hidden">
-        <h2 class="serif text-2xl mb-3">Thank you for subscribing.</h2>
-        <p class="text-ink-soft">
+      <div id="subscribe-thanks-state" class="bg-paper-warm border border-ink p-8 text-left hidden">
+        <div class="folio mb-4"><span>§ Subscribed</span><span>See you in the inbox</span></div>
+        <h2 class="serif text-3xl mb-3 leading-tight">Thank you for subscribing.</h2>
+        <p class="text-ink-soft leading-relaxed">
           <strong class="text-ink">Check your spam or promotions folder.</strong> A welcome email from Dan should arrive in a minute or two — if it landed there, drag it into your inbox so the next one lands where it belongs.
         </p>
       </div>
@@ -66,53 +89,118 @@ const posts = (await getCollection('blog'))
         });
       })();
     </script>
-    </>
   ) : (
     <>
-      <section class="py-12 border-b border-ink/10">
-        <h1 class="serif text-5xl md:text-6xl mb-4 leading-tight max-w-3xl">
-          Tools, templates and honest advice for working songwriters.
-        </h1>
-        <p class="text-lg text-ink-soft max-w-2xl mb-8">
-          Slant rhyme finder, song idea generator, split sheet maker, royalty calculator —
-          plus a blog where I show my working. Hosted by Dan Healy.
-        </p>
-        <div class="flex gap-4 flex-wrap">
-          <a href="/tools" class="px-5 py-3 rounded-md bg-ink text-paper no-underline hover:bg-accent transition">Browse the tools</a>
-          <a href="/blog" class="px-5 py-3 rounded-md border border-ink/20 no-underline hover:border-accent hover:text-accent transition">Read the blog</a>
+      {/* ══ MASTHEAD HERO ══ */}
+      <section class="max-w-7xl mx-auto px-8 pt-12">
+        <div class="folio">
+          <span>Vol. I · N°01</span>
+          <span>The monthly for working songwriters</span>
         </div>
+        <div class="mt-6">
+          <div class="serif font-light text-ink leading-[0.92] tracking-[-0.045em]" style="font-size: clamp(72px, 10vw, 140px);">
+            The <span class="italic font-normal">song</span>writer's
+          </div>
+          <div class="serif font-light text-ink leading-[0.92] tracking-[-0.045em] flex items-baseline gap-10 flex-wrap" style="font-size: clamp(72px, 10vw, 140px);">
+            Desk.
+            <span class="mono text-[11px] tracking-tracker text-ink-muted uppercase max-w-[280px] leading-[1.5] font-sans normal-case" style="letter-spacing:0.18em;">
+              Tools, templates, and honest advice for the people who actually write the songs.
+            </span>
+          </div>
+        </div>
+        <hr class="border-t border-ink mt-10" />
       </section>
 
-      <section class="py-12 border-b border-ink/10">
-        <h2 class="serif text-3xl mb-6">Featured tools</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <a href="/tools/songstarter" class="block p-5 rounded-lg border border-ink/10 hover:border-accent no-underline bg-paper-warm">
-            <div class="serif text-xl mb-1">Songstarter</div>
-            <div class="text-sm text-ink-muted">Specific song starting points based on who you are, how you feel, and the vibe you want.</div>
-          </a>
-          <a href="/tools" class="block p-5 rounded-lg border border-ink/10 hover:border-accent no-underline bg-paper-warm">
-            <div class="serif text-xl mb-1">Slant rhyme finder</div>
-            <div class="text-sm text-ink-muted">Near-rhymes, multi-syllable rhymes, assonance — tuned for how modern songs actually rhyme.</div>
-          </a>
-          <a href="/tools" class="block p-5 rounded-lg border border-ink/10 hover:border-accent no-underline bg-paper-warm">
-            <div class="serif text-xl mb-1">Split sheet generator</div>
-            <div class="text-sm text-ink-muted">A proper printable split sheet in under two minutes. Free, no signup.</div>
-          </a>
+      {/* ══ MARQUEE ══ */}
+      <div class="border-t border-b border-ink bg-ink text-paper py-3 overflow-hidden">
+        <div class="marquee-track serif italic text-sm">
+          {Array.from({ length: 3 }).map(() => (
+            <span class="flex gap-10 pl-10">
+              <span>Free tools for working songwriters</span>
+              <span class="text-accent">◆</span>
+              <span>No signups, no paywalls</span>
+              <span class="text-accent">◆</span>
+              <span>Made in a room, not a boardroom</span>
+              <span class="text-accent">◆</span>
+            </span>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section class="py-12">
-        <h2 class="serif text-3xl mb-6">From the blog</h2>
-        <div class="grid sm:grid-cols-2 gap-6">
-          {posts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="block no-underline">
-              <div class="serif text-xl mb-1">{post.data.title}</div>
-              <div class="text-sm text-ink-muted mb-1">
-                {post.data.pubDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {/* ══ TOOLS GRID ══ */}
+      <section class="max-w-7xl mx-auto px-8 py-16 border-b border-line">
+        <div class="flex justify-between items-end mb-10 flex-wrap gap-6">
+          <div>
+            <div class="folio mb-2" style="min-width:260px;"><span>§01 — The Tools</span><span>Free · No signups</span></div>
+            <div class="serif font-light tracking-[-0.035em] leading-[0.95] mt-2" style="font-size: clamp(40px, 6vw, 72px);">
+              Six things<br/>that should <span class="italic">just exist</span>.
+            </div>
+          </div>
+          <div class="text-sm text-ink-muted max-w-xs leading-relaxed text-right">
+            Free, fast, and made by a working songwriter. Every tool has a proper guide underneath.
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 border border-ink">
+          {tools.map((t, i) => (
+            <a href={t.status === 'live' ? t.href : '#'} class={`no-underline block p-6 min-h-[200px] flex flex-col justify-between ${i%3!==2?'md:border-r border-ink':''} ${i<3?'md:border-b border-ink':''} ${t.status==='soon'?'bg-paper-warm':'bg-paper'} ${t.status==='live'?'hover:bg-paper-warm transition':''}`}>
+              <div>
+                <div class="flex justify-between items-start mb-4">
+                  <div class="serif italic font-light text-accent" style="font-size:42px;line-height:1;">{t.n}</div>
+                  <span class={`mono text-[9px] tracking-tracker uppercase border px-2 py-1 ${t.status==='live'?'text-moss border-moss':'text-ink-muted border-line'}`}>
+                    {t.status==='live'?'● Live':'○ Soon'}
+                  </span>
+                </div>
+                <div class="serif text-2xl leading-tight font-medium mb-2">{t.t}</div>
+                <div class="text-sm text-ink-muted leading-relaxed">{t.d}</div>
               </div>
-              <div class="text-ink-soft">{post.data.description}</div>
+              <div class="mono text-[10px] tracking-tracker text-ink uppercase mt-5 flex justify-between">
+                <span>Open tool</span><span>→</span>
+              </div>
             </a>
           ))}
+        </div>
+      </section>
+
+      {/* ══ FROM THE BLOG ══ */}
+      <section class="max-w-7xl mx-auto px-8 py-16 border-b border-line">
+        <div class="folio mb-6"><span>§02 — From the desk</span><span>Latest writing</span></div>
+        <div class="serif font-light tracking-[-0.03em] leading-[1]" style="font-size:clamp(40px, 6vw, 72px);">The <span class="italic">column.</span></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="no-underline block border-t border-ink pt-4">
+              <div class="kicker mb-2">
+                {post.data.pubDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+              <div class="serif text-xl leading-tight font-medium mb-2">{post.data.title}</div>
+              <div class="text-sm text-ink-muted leading-relaxed">{post.data.description}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ NEWSLETTER ══ */}
+      <section id="newsletter" class="bg-paper-warm border-b border-ink py-16">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="folio mb-3"><span>§03 — The Dispatch</span><span>Monthly · Free</span></div>
+            <div class="serif font-light tracking-[-0.035em] leading-[0.95]" style="font-size:clamp(44px,6vw,64px);">
+              One letter<br/>a month.<br/><span class="italic text-accent">Never more.</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-[15px] text-ink-soft leading-relaxed mb-6 max-w-md">
+              A first-Sunday-of-the-month email with one new tool, one useful essay, and one industry thing you should probably know about.
+            </div>
+            <iframe
+              src="https://subscribe-forms.beehiiv.com/5fc2e95f-4778-4af0-8c37-17455d00995b"
+              title="Subscribe"
+              frameborder="0" scrolling="no"
+              style="width: 100%; height: 56px; margin: 0; border: 0; background: transparent; display: block;"
+            ></iframe>
+            <div class="mono text-[10px] tracking-tracker text-ink-muted uppercase mt-4">
+              No spam · No tracking pixels
+            </div>
+          </div>
         </div>
       </section>
     </>
