@@ -18,6 +18,7 @@ const tools = [
 
 const liveCount = tools.filter(t => t.status === 'live').length;
 const soonCount = tools.length - liveCount;
+const pad2 = (n) => String(n).padStart(2, '0');
 ---
 
 <BaseLayout
@@ -25,41 +26,98 @@ const soonCount = tools.length - liveCount;
   description="Free tools for songwriters: song idea generator, slant rhyme finder, split sheet generator, royalty calculator, and more."
   wide={true}
 >
-  <section class="max-w-7xl mx-auto px-8 pt-12 pb-10">
-    <div class="folio"><span>§01 — Tools index</span><span>{String(tools.length).padStart(2,'0')} items · {String(liveCount).padStart(2,'0')} live · {String(soonCount).padStart(2,'0')} in build</span></div>
-    <h1 class="serif font-light tracking-[-0.04em] leading-[0.95] mt-5" style="font-size: clamp(64px, 10vw, 120px);">
+  <section class="max-w-7xl mx-auto px-8 pt-12 pb-8">
+    <div class="folio"><span>§01 — Tools</span><span>{pad2(tools.length)} items · {pad2(liveCount)} live · {pad2(soonCount)} in build</span></div>
+    <h1 class="serif font-light tracking-[-0.04em] leading-[0.95] mt-5" style="font-size:clamp(64px,10vw,120px);">
       The <span class="italic">tools</span>.
     </h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
-      <p class="serif text-lg leading-[1.5] text-ink-soft max-w-lg">
-        Free, fast, and made by a working songwriter. Every tool has a proper guide underneath it — what it's for, how to use it well, and what to watch out for.
-      </p>
-      <div class="flex items-end justify-end gap-6 flex-wrap">
-        {['All','Ideation','Lyric','Structure','Business'].map((f, i) => (
-          <span class={`mono text-[11px] tracking-tracker uppercase pb-[2px] ${i===0?'text-ink border-b-[1.5px] border-ink':'text-ink-muted'}`}>{f}</span>
-        ))}
+    <p class="serif text-[19px] leading-[1.5] text-ink-soft mt-6 max-w-2xl">
+      Free, fast, and made by a working songwriter. Every tool has a proper guide underneath it — what it's for, how to use it well, and what to watch out for.
+    </p>
+  </section>
+
+  <div class="border-t border-ink"></div>
+
+  {/* ── Grid ── */}
+  <section class="max-w-7xl mx-auto px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 mb-10">
+      <div>
+        <div class="folio"><span>A</span><span>The toolkit</span></div>
+        <div class="serif font-light tracking-[-0.03em] leading-[0.95] mt-3" style="font-size:clamp(40px,5vw,54px);">
+          Six things<br/><span class="italic text-accent">that should just exist.</span>
+        </div>
       </div>
+      <div class="text-[15px] text-ink-muted leading-relaxed self-end max-w-lg">
+        None of these are hard to build, but somehow nobody had. So I did. No signups, no paywalls, no trial periods — if the tool works, it works the moment the page loads.
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 border border-ink">
+      {tools.map((t, i) => {
+        const isLast = i === tools.length - 1;
+        const secondToLast = i === tools.length - 2;
+        const leftCol = i % 2 === 0;
+        const inLastRow = isLast || (secondToLast && tools.length % 2 === 0);
+        const Tag = t.status === 'live' ? 'a' : 'div';
+        return (
+          <Tag
+            href={t.status === 'live' ? t.href : undefined}
+            class={`no-underline p-7 min-h-[240px] flex flex-col justify-between ${t.status === 'live' ? 'hover:bg-paper-warm transition cursor-pointer' : 'bg-paper-warm'} ${leftCol ? 'md:border-r border-ink' : ''} ${!inLastRow ? 'md:border-b border-ink' : ''} border-b border-ink md:border-b-0`}
+          >
+            <div class="flex gap-6">
+              {/* "Index card" thumbnail — mirrors the PDF thumbnail on /resources */}
+              <div class="w-20 h-[104px] bg-paper border border-line p-2 flex-shrink-0 relative flex flex-col">
+                <div class="h-[3px] bg-accent mb-2"></div>
+                <div class="flex-1 flex items-center justify-center">
+                  <div class="serif italic font-light text-ink leading-none" style="font-size:44px;">{t.n}</div>
+                </div>
+                <div class="absolute bottom-1 right-1.5 mono text-[5px] text-ink-muted uppercase tracking-tracker">Tool</div>
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start mb-1 gap-3">
+                  <span class="mono text-[10px] tracking-tracker text-accent uppercase">{t.tag}</span>
+                  <span class={`mono text-[10px] tracking-tracker uppercase border px-2 py-[2px] whitespace-nowrap ${t.status==='live' ? 'text-moss border-moss' : 'text-ink-muted border-line'}`}>
+                    {t.status === 'live' ? '● Live' : '○ Soon'}
+                  </span>
+                </div>
+                <div class="serif text-2xl font-medium leading-tight mb-2">{t.name}</div>
+                <div class="text-sm text-ink-muted leading-[1.55]">{t.d}</div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-5 pt-4 border-t border-line">
+              <span class="mono text-[10px] tracking-tracker text-ink-muted uppercase">Free · No signups</span>
+              <span class={`mono text-[11px] tracking-tracker uppercase pb-[2px] ${t.status === 'live' ? 'text-ink border-b-[1.5px] border-ink' : 'text-ink-muted'}`}>
+                {t.status === 'live' ? 'Open tool →' : 'Coming soon'}
+              </span>
+            </div>
+          </Tag>
+        );
+      })}
     </div>
   </section>
 
   <div class="border-t border-ink"></div>
 
-  {tools.map((tool) => (
-    <a
-      href={tool.status === 'live' ? tool.href : '#'}
-      class={`no-underline grid grid-cols-[60px_1.3fr_2fr_120px] md:grid-cols-[80px_1.3fr_2fr_120px] items-stretch border-b border-line gap-6 md:gap-8 px-8 py-8 max-w-7xl mx-auto ${tool.status==='soon'?'bg-paper-warm opacity-90':'hover:bg-paper-warm transition'}`}
-    >
-      <div class="serif italic font-light text-accent leading-none" style="font-size:52px;">{tool.n}</div>
-      <div>
-        <div class="kicker mb-2">{tool.tag}</div>
-        <div class="serif text-[28px] md:text-[32px] font-medium tracking-[-0.015em] leading-[1.05]">{tool.name}</div>
-      </div>
-      <div class="text-[15px] text-ink-soft leading-[1.55]">{tool.d}</div>
-      <div class="flex items-center justify-end">
-        <span class={`mono text-[10px] tracking-tracker uppercase border px-3 py-1.5 ${tool.status==='live'?'text-moss border-moss':'text-ink-muted border-line'}`}>
-          {tool.status==='live'?'● Open →':'○ Soon'}
-        </span>
-      </div>
-    </a>
-  ))}
+  {/* ── Footer note ── */}
+  <section class="max-w-3xl mx-auto px-8 py-16">
+    <div class="folio mb-6"><span>B</span><span>A note on the toolkit</span></div>
+    <h2 class="serif font-light tracking-[-0.03em] leading-[1]" style="font-size:clamp(32px,4.5vw,42px);">
+      Free, forever. <span class="italic">No catch.</span>
+    </h2>
+    <div class="prose mt-8">
+      <p>
+        Every tool on this page is free and stays that way. No trial period, no
+        premium export, no watermark on the PDFs. If I build something that
+        genuinely takes money to run (a long-form AI tool, say), it'll live
+        somewhere else and I'll tell you upfront.
+      </p>
+      <p>
+        If a tool doesn't do what you expected, or you want one that isn't
+        here — <a href="mailto:dan@songwritersdesk.com">write to the desk</a>.
+        I read everything.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
