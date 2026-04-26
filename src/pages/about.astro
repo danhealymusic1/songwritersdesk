@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="About"
-  description="Who's behind The Songwriter's Desk — a site by working songwriter Dan Healy."
+  description="Who's behind The Songwriter's Desk — songwriter and producer Daniel Joseph Healy."
   wide={true}
 >
   <section class="max-w-7xl mx-auto px-8 pt-12 pb-8">
@@ -18,8 +18,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-16 border-b border-line">
     <div>
-      <div class="w-full aspect-[4/5] border border-line bg-paper-warm" style="background-image:repeating-linear-gradient(135deg, #EFE3D6 0 14px, rgba(26,24,20,0.06) 14px 15px);"></div>
-      <div class="folio mt-3"><span>Dan Healy, founder</span><span>2026</span></div>
+      {/* Profile photo with graceful fallback if /dan-healy.jpg is missing */}
+      <div class="w-full aspect-[4/5] border border-line bg-paper-warm overflow-hidden" style="background-image:repeating-linear-gradient(135deg, #EFE3D6 0 14px, rgba(26,24,20,0.06) 14px 15px);">
+        <img
+          src="/dan-healy.jpg"
+          alt="Daniel Joseph Healy in his studio with a Gibson acoustic guitar"
+          class="w-full h-full object-cover"
+          loading="eager"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <div class="folio mt-3"><span>Daniel Joseph Healy</span><span>Songwriter & producer</span></div>
     </div>
     <div>
       <div class="folio"><span>A note from the desk</span><span>~ 320 words</span></div>
@@ -28,8 +37,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         he Songwriter's Desk is a small, opinionated resource for the people who actually write the songs — not the industry that sells them, not the platforms that distribute them, not the coaches who teach about them. <em>The people who write them.</em>
       </p>
       <div class="prose mt-8" style="max-width:none;">
-        <p>It's hosted by me, Dan Healy. I'm a songwriter. Everything here is free — no signup, no newsletter pop-up that follows you around for six weeks. The tools work, the PDFs are proper PDFs, the essays are written by hand.</p>
-        <p>If it stops being useful, I'll take it down. If you need something that isn't here, email.</p>
+        <p>
+          It's hosted by me, <strong>Daniel Joseph Healy</strong> — a working songwriter and producer based out of my own studio. The tools and PDFs on this site are free to use; the newsletter is opt-in and once a month, never a pop-up that chases you around the page. If you like what's here and want a producer or a co-writer in your corner, that's what I do for a living — the contact link is at the bottom of this page.
+        </p>
+        <p>
+          You can also find me on Instagram at
+          <a href="https://instagram.com/danhealymusic" target="_blank" rel="noopener">@danhealymusic</a>
+          (the songwriting and production work) or
+          <a href="https://instagram.com/songwritersdesk" target="_blank" rel="noopener">@songwritersdesk</a>
+          (the desk itself).
+        </p>
+        <p>If a tool stops being useful, I'll fix it. If you need something that isn't here, email.</p>
       </div>
     </div>
   </section>
@@ -38,9 +56,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="folio mb-6"><span>The working principles</span><span>Not a mission statement</span></div>
     <div class="grid grid-cols-1 md:grid-cols-3 border border-ink">
       {[
-        { n: '01', t: 'Free means free', d: 'No tiers. No "premium export." No watermarks on the PDFs.' },
+        { n: '01', t: 'Tools stay free', d: 'The tools and templates on the desk are free to use, and stay that way.' },
         { n: '02', t: 'Plain English', d: "If a song-plugger couldn't read it over a pint, I rewrote it." },
-        { n: '03', t: 'The form is the feature', d: "Printing a proper split sheet shouldn't require a five-day free trial." },
+        { n: '03', t: 'The form is the feature', d: "Printing a proper split sheet shouldn't take longer than the song did to write." },
         { n: '04', t: 'Write it myself', d: 'Every piece on this site was written by a songwriter, edited by a songwriter.' },
         { n: '05', t: 'No tracking theatre', d: 'Privacy-first analytics only. No cookies, no third-party ad scripts.' },
         { n: '06', t: 'Answer the email', d: 'If you write to the desk, a human writes back. Usually within 48 hours.' },
@@ -61,6 +79,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </a>
     <div class="text-[15px] mt-6 max-w-xl mx-auto leading-relaxed" style="color:rgba(244,239,230,0.7);">
       Questions, typo corrections, songs you want me to hear, and arguments about the Oxford comma. All welcome.
+    </div>
+    <div class="mt-8 flex gap-6 justify-center flex-wrap mono text-[11px] tracking-tracker uppercase" style="color:rgba(244,239,230,0.7);">
+      <a href="https://instagram.com/danhealymusic" target="_blank" rel="noopener" class="no-underline border-b border-paper/40 pb-[2px] hover:text-accent">
+        Instagram · @danhealymusic
+      </a>
+      <a href="https://instagram.com/songwritersdesk" target="_blank" rel="noopener" class="no-underline border-b border-paper/40 pb-[2px] hover:text-accent">
+        Instagram · @songwritersdesk
+      </a>
     </div>
   </section>
 </BaseLayout>
