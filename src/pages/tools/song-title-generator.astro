@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SongTitleGenerator from '../../components/tools/SongTitleGenerator.jsx';
+---
+
+<BaseLayout
+  title="Song title generator — by mood, genre, and theme"
+  description="Generate five song titles at a time, filtered by mood, genre, and theme. No signup, no paywall. For songwriters who already have the song and need the title."
+>
+  <article class="max-w-3xl">
+    <h1 class="serif text-4xl mb-3">Song title generator</h1>
+    <p class="text-ink-soft text-lg mb-8">
+      Five titles at a time, filtered by mood, genre, and theme. Built for the
+      moment when you've finished writing a song and the working title still
+      reads <em>untitled_v3_FINAL</em>.
+    </p>
+
+    <SongTitleGenerator client:load />
+
+    <section class="prose mt-14">
+      <h2>Why this exists</h2>
+      <p>
+        Most song title generators online give you random combinations of stock
+        words — <em>Crimson Dreams</em>, <em>Midnight Whisper</em>, the kind of
+        thing that sounds like a perfume ad. They're not titles, they're
+        atmosphere. This one tries harder. Pick a <strong>mood</strong>, optionally
+        a <strong>genre</strong>, optionally a <strong>theme</strong>, and the
+        generator picks from word pools tagged for that combination, then runs
+        the words through eighteen different syntactic patterns — single nouns,
+        possessive phrases, conditional sentences, prepositional setups, place
+        names, questions. The results read more like real song titles because
+        they're built like real song titles.
+      </p>
+
+      <h2>How to use it</h2>
+      <p>
+        The fastest path: pick a mood, hit <em>Generate five more</em> until
+        something catches your ear. Don't take the first one. The point isn't
+        to land on <em>the</em> title — it's to surface five jumping-off points
+        and let your subconscious react to one of them. Sometimes a generator
+        suggests <em>Brooklyn, Anyway</em> and you write a different title that
+        only exists because that one made you think of it.
+      </p>
+      <p>
+        If a title is almost right, hit the <strong>↻</strong> button next to
+        it to reroll just that line — the rest of the list stays put. If a
+        title is exactly right, hit <strong>Copy</strong> and stop scrolling.
+      </p>
+      <p>
+        The mood/genre/theme combination at the bottom of the box is shown so
+        you can share or recreate a session. Same combination, same vibe pool,
+        infinite reshuffles.
+      </p>
+
+      <h2>What makes a good song title</h2>
+      <p>
+        A title is the smallest version of the song. It has to do four jobs at
+        once: tell the listener what they're about to hear, give them a reason
+        to click, plant a seed of curiosity, and reward them when the chorus
+        finally lands on the same words. The best titles do all four without
+        looking like they're trying.
+      </p>
+
+      <h3>1. It should be in the lyric — usually</h3>
+      <p>
+        The conventional wisdom in commercial songwriting is that the title is
+        the hook line, sung in the chorus, repeated enough that a listener can
+        hum it to a friend. <em>Shake It Off</em>. <em>Wonderwall</em>.
+        <em>Free Fallin'</em>. The title <em>is</em> the song's most-repeated
+        phrase. This is the safe lane and it works for most genres.
+      </p>
+      <p>
+        Indie, folk, and a lot of hip-hop break this rule deliberately. The
+        title becomes a frame — a label outside the song that tells you how to
+        read it. <em>Pyramid Song</em>. <em>Holocene</em>. <em>Untitled (How Does It Feel)</em>.
+        These titles work precisely because they aren't in the lyric; they
+        invite you to figure out the connection.
+      </p>
+
+      <h3>2. It should be specific, not atmospheric</h3>
+      <p>
+        Titles that work tend to be concrete. <em>Tennessee Whiskey</em> beats
+        <em>Southern Drink</em>. <em>Brooklyn Baby</em> beats <em>City Girl</em>.
+        Specificity is what makes a listener feel that the song belongs to a
+        real place, a real person, a real night. Generators that lean on
+        adjectives — <em>broken</em>, <em>wild</em>, <em>endless</em> — tend to
+        produce titles that are pure mood and zero song. The best titles in
+        this generator's output are usually the ones with a place, a time, or
+        a person in them.
+      </p>
+
+      <h3>3. It should sound like the genre</h3>
+      <p>
+        A country title and a hip-hop title use different vocabularies, and
+        listeners can tell at a glance which is which. <em>Mama's Hometown</em>
+        sounds like country before you hear a note. <em>Crown Up</em> sounds
+        like hip-hop. <em>Pale Sundays</em> sounds like indie. The genre filter
+        in this tool weights the word pool toward genre-typical vocabulary, so
+        country results lean country and indie results lean indie. If you
+        cross-pollinate (mood: defiant, genre: folk), you get the kind of
+        contrast that produces interesting titles.
+      </p>
+
+      <h3>4. It should leave room</h3>
+      <p>
+        A title that explains too much closes the song before it opens.
+        <em>How My Wife Left Me on a Tuesday</em> is a story you've already
+        read. <em>Tuesday</em> is a song you have to hear. The best titles are
+        slightly oblique — they tell you the temperature, not the plot.
+        Watch for titles in the generator that feel "too explanatory" and
+        skip them.
+      </p>
+
+      <h2>The mood and theme combinations that produce the best results</h2>
+      <p>
+        Through testing, the highest-quality results tend to come from these
+        combinations:
+      </p>
+      <ul>
+        <li><strong>Bittersweet + Folk + Nostalgia</strong> — quiet, specific, lived-in.</li>
+        <li><strong>Restless + Country + Heartbreak</strong> — highway-and-whiskey territory; very fertile.</li>
+        <li><strong>Tender + Indie + Love</strong> — the sweater/garden/Sunday-morning vein.</li>
+        <li><strong>Defiant + Hip-hop + Defiance</strong> — crowns, fire, gospel, real ones.</li>
+        <li><strong>Melancholy + Pop + Loneliness</strong> — modern pop's bread and butter.</li>
+      </ul>
+      <p>
+        The least productive combinations tend to be the ones that fight each
+        other — <em>Joyful + Heartbreak</em>, for instance. If a combination
+        keeps producing weird results, swap the theme to <em>Any theme</em>
+        and let the mood do the work.
+      </p>
+
+      <h2>What this isn't</h2>
+      <p>
+        This isn't a song writer. It doesn't generate lyrics, it doesn't
+        suggest melodies, and it has no opinion about your verse. It's a list
+        of starting points for a problem most songwriters know well — the song
+        is finished, the working title is bad, and you're staring at a blinking
+        cursor in the rename field of your DAW.
+      </p>
+      <p>
+        It's also not the last word. The titles here are seeds. If a generated
+        title is 80% right, finish it yourself. <em>The Ghost</em> can become
+        <em>The Ghost of Last December</em>. <em>Brooklyn Baby</em> can become
+        <em>Brooklyn Baby (For Real This Time)</em>. The generator gives you
+        the raw material; you give it the meaning.
+      </p>
+    </section>
+
+    <aside class="mt-14 p-6 rounded-lg border border-ink/10 bg-paper-warm">
+      <div class="text-xs uppercase tracking-wider text-ink-muted mb-2">Related</div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <a href="/tools/songstarter" class="hover:text-accent">Songstarter</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/slant-rhymes" class="hover:text-accent">Slant rhyme finder</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools/split-sheet" class="hover:text-accent">Split sheet generator</a>
+        <span class="text-ink-muted">·</span>
+        <a href="/tools" class="hover:text-accent">All tools</a>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>
