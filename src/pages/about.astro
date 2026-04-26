@@ -38,7 +38,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <div class="prose mt-8" style="max-width:none;">
         <p>
-          It's hosted by me, <strong>Daniel Joseph Healy</strong> — a working songwriter and producer based out of my own studio. The tools and PDFs on this site are free to use; the newsletter is opt-in and once a month, never a pop-up that chases you around the page. If you like what's here and want a producer or a co-writer in your corner, that's what I do for a living — the contact link is at the bottom of this page.
+          It's hosted by me, <strong>Daniel Joseph Healy</strong> — a working songwriter and producer based out of my own studio. The tools and PDFs on this site are free to use; the newsletter is opt-in and once a month, never a pop-up that chases you around the page. If you like what's here and want a producer or a co-writer in your corner, that's what I do for a living — click the SoundBetter link below to get in touch.
         </p>
         <p>
           You can also find me on Instagram at
@@ -49,26 +49,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
         <p>If a tool stops being useful, I'll fix it. If you need something that isn't here, email.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="max-w-7xl mx-auto px-8 py-16 border-b border-line">
-    <div class="folio mb-6"><span>The working principles</span><span>Not a mission statement</span></div>
-    <div class="grid grid-cols-1 md:grid-cols-3 border border-ink">
-      {[
-        { n: '01', t: 'Tools stay free', d: 'The tools and templates on the desk are free to use, and stay that way.' },
-        { n: '02', t: 'Plain English', d: "If a song-plugger couldn't read it over a pint, I rewrote it." },
-        { n: '03', t: 'The form is the feature', d: "Printing a proper split sheet shouldn't take longer than the song did to write." },
-        { n: '04', t: 'Write it myself', d: 'Every piece on this site was written by a songwriter, edited by a songwriter.' },
-        { n: '05', t: 'No tracking theatre', d: 'Privacy-first analytics only. No cookies, no third-party ad scripts.' },
-        { n: '06', t: 'Answer the email', d: 'If you write to the desk, a human writes back. Usually within 48 hours.' },
-      ].map((p, i) => (
-        <div class={`p-6 min-h-[180px] ${i%3!==2?'md:border-r border-ink':''} ${i<3?'md:border-b border-ink':''}`}>
-          <div class="serif italic font-light text-accent mb-3" style="font-size:28px;">§{p.n}</div>
-          <div class="serif text-xl font-medium mb-2 leading-tight">{p.t}</div>
-          <div class="text-sm text-ink-muted leading-relaxed">{p.d}</div>
-        </div>
-      ))}
     </div>
   </section>
 
@@ -99,6 +79,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           loading="lazy"
         />
       </a>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-8 py-16 border-b border-line">
+    <div class="folio mb-6"><span>The working principles</span><span>Not a mission statement</span></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 border border-ink">
+      {[
+        { n: '01', t: 'Tools stay free', d: 'The tools and templates on the desk are free to use, and stay that way.' },
+        { n: '02', t: 'Plain English', d: "If a song-plugger couldn't read it over a pint, I rewrote it." },
+        { n: '03', t: 'The form is the feature', d: "Printing a proper split sheet shouldn't take longer than the song did to write." },
+        { n: '04', t: 'Write it myself', d: 'Every piece on this site was written by a songwriter, edited by a songwriter.' },
+        { n: '05', t: 'No tracking theatre', d: 'Privacy-first analytics only. No cookies, no third-party ad scripts.' },
+        { n: '06', t: 'Answer the email', d: 'If you write to the desk, a human writes back. Usually within 48 hours.' },
+      ].map((p, i) => (
+        <div class={`p-6 min-h-[180px] ${i%3!==2?'md:border-r border-ink':''} ${i<3?'md:border-b border-ink':''}`}>
+          <div class="serif italic font-light text-accent mb-3" style="font-size:28px;">§{p.n}</div>
+          <div class="serif text-xl font-medium mb-2 leading-tight">{p.t}</div>
+          <div class="text-sm text-ink-muted leading-relaxed">{p.d}</div>
+        </div>
+      ))}
     </div>
   </section>
 
