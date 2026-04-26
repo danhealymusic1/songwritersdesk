@@ -42,6 +42,12 @@ function pickWeighted(scored, exclude = new Set()) {
 }
 
 // ── Patterns ─────────────────────────────────────────────────────────
+// Verbs that contain "me", "you", or are multi-word phrases — only used
+// in patterns where they make grammatical sense (e.g. "If You [verb]")
+// rather than patterns that append a pronoun ("[verb] Me Twice").
+const isCleanStem = (v) => !/^(walk|come|hold|let|keep|mean|know|miss|need|reach|show|save|hurt|find|teach|kiss|catch|lose) /.test(v) &&
+                            !/ (me|you|it|nothing|better)$/.test(v);
+
 const PATTERNS = [
   // 1. The + noun
   ({ noun }) => `The ${cap(noun())}`,
@@ -53,19 +59,24 @@ const PATTERNS = [
   ({ noun }) => cap(noun()),
   // 5. Conditional with verb
   ({ verb }) => `If You ${capPhrase(verb())}`,
-  // 6. Conditional with verb (negation)
+  // 6. Conditional (when)
   ({ verb }) => `When You ${capPhrase(verb())}`,
-  // 7. Don't + verb
-  ({ verb }) => `Don't ${capPhrase(verb())}`,
-  // 8. Until / before
+  // 7. Don't + verb (clean stems only)
+  ({ verb }) => {
+    let v = verb();
+    let attempts = 0;
+    while (!isCleanStem(v) && attempts++ < 6) v = verb();
+    return `Don't ${capPhrase(v)}`;
+  },
+  // 8. Until / before / after
   ({ verb }) => `${pick(['Before You', 'Until You', 'After You'])} ${capPhrase(verb())}`,
   // 9. Prepositional + noun
   ({ noun }) => `${pick(['Under', 'After', 'Halfway to', 'Between', 'Across', 'Inside'])} ${pick(['the', 'a'])} ${cap(noun())}`,
   // 10. Place setting
   ({ place }) => `${pick(['In', 'Outside', 'Back to', 'Leaving'])} ${cap(place())}`,
-  // 11. Place + emotion
-  ({ place, adj }) => `${cap(place())}, ${pick(['Anyway', 'Again', 'in October', 'in Reverse', 'on Repeat'])}`,
-  // 12. Number/time
+  // 11. Place + tag
+  ({ place }) => `${cap(place())}, ${pick(['Anyway', 'Again', 'in October', 'in Reverse', 'on Repeat'])}`,
+  // 12. Number/time + noun
   ({ noun }) => `${pick(['3am', 'Twenty-One', 'October', 'Friday Night', 'Last December', 'Sunday Morning'])} ${cap(noun())}`,
   // 13. Question
   ({ noun }) => `${pick(['Where Did the', 'Who Stole the', 'What Happened to', 'Whose Side Is the'])} ${cap(noun())}${randomQ()}`,
@@ -73,12 +84,47 @@ const PATTERNS = [
   ({ adj, noun }) => `${pick(['Her', 'His', 'Their'])} ${cap(adj())} ${cap(noun())}`,
   // 15. Anyway / regardless
   ({ noun }) => `${cap(noun())}, ${pick(['Anyway', 'Regardless', 'Either Way', 'Eventually'])}`,
-  // 16. Compound noun
-  ({ noun, adj }) => `${cap(noun())} & ${cap(noun())}`,
-  // 17. Verb me
-  ({ verb }) => `${capPhrase(verb())} Me ${pick(['Twice', 'Slowly', 'Softer', 'Anyway', 'Tomorrow'])}`,
-  // 18. Tell + name
+  // 16. Two nouns &
+  ({ noun }) => `${cap(noun())} & ${cap(noun())}`,
+  // 17. Tell + person + direction
   () => `${pick(['Tell', 'Call', 'Find', 'Send'])} ${pick(['Me', 'Mama', 'Her', 'Him', 'Them'])} ${pick(['Home', 'Back', 'Slow', 'Anyway', 'Twice'])}`,
+  // 18. Like a noun
+  ({ noun }) => `Like a ${cap(noun())}`,
+  // 19. All my X
+  ({ noun }) => `All My ${cap(noun())}`,
+  // 20. Songs for X / Letters from X
+  ({ noun }) => `${pick(['Songs', 'Letters', 'Stories', 'Postcards'])} ${pick(['for', 'from', 'about'])} ${cap(noun())}`,
+  // 21. Born to X (clean stems only)
+  ({ verb }) => {
+    let v = verb();
+    let attempts = 0;
+    while (!isCleanStem(v) && attempts++ < 6) v = verb();
+    return `Born to ${capPhrase(v)}`;
+  },
+  // 22. Numbered noun
+  ({ noun }) => `${pick(['Two', 'Three', 'Seven', 'Twelve', 'A Hundred'])} ${cap(noun())}`,
+  // 23. For the X
+  ({ noun }) => `For the ${cap(noun())}`,
+  // 24. Until we X (clean stems)
+  ({ verb }) => {
+    let v = verb();
+    let attempts = 0;
+    while (!isCleanStem(v) && attempts++ < 6) v = verb();
+    return `Until We ${capPhrase(v)}`;
+  },
+  // 25. Already
+  ({ verb }) => {
+    let v = verb();
+    let attempts = 0;
+    while (!isCleanStem(v) && attempts++ < 6) v = verb();
+    return `Already ${capPhrase(v)}`;
+  },
+  // 26. Noun in Place
+  ({ noun, place }) => `${cap(noun())} in ${cap(place())}`,
+  // 27. Adj noun, Place
+  ({ adj, noun, place }) => `${cap(adj())} ${cap(noun())} (from ${cap(place())})`,
+  // 28. Almost + adj noun
+  ({ adj, noun }) => `Almost ${cap(adj())}, Almost ${cap(noun())}`,
 ];
 
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
